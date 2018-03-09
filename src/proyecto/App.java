@@ -28,8 +28,26 @@ public class App extends javax.swing.JFrame {
     private void initComponents() {
 
         jp_main = new javax.swing.JPanel();
+        jp_laberinto = new javax.swing.JPanel();
+        jp_demepeno = new javax.swing.JPanel();
+        jp_matematicas = new javax.swing.JPanel();
+        jp_compresion = new javax.swing.JPanel();
+        jp_menor = new javax.swing.JPanel();
+        jp_arbol = new javax.swing.JPanel();
         jp_header = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jb_laberinto = new javax.swing.JButton();
+        jb_desempeno = new javax.swing.JButton();
+        jb_matematicas = new javax.swing.JButton();
+        jb_compresion = new javax.swing.JButton();
+        jb_MenorCosto = new javax.swing.JButton();
+        jb_arbol = new javax.swing.JButton();
+        jb_salir = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,10 +55,112 @@ public class App extends javax.swing.JFrame {
         jp_main.setName("Main"); // NOI18N
         jp_main.setLayout(new java.awt.CardLayout());
 
+        javax.swing.GroupLayout jp_laberintoLayout = new javax.swing.GroupLayout(jp_laberinto);
+        jp_laberinto.setLayout(jp_laberintoLayout);
+        jp_laberintoLayout.setHorizontalGroup(
+            jp_laberintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 979, Short.MAX_VALUE)
+        );
+        jp_laberintoLayout.setVerticalGroup(
+            jp_laberintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
+
+        jp_main.add(jp_laberinto, "card2");
+
+        javax.swing.GroupLayout jp_demepenoLayout = new javax.swing.GroupLayout(jp_demepeno);
+        jp_demepeno.setLayout(jp_demepenoLayout);
+        jp_demepenoLayout.setHorizontalGroup(
+            jp_demepenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 979, Short.MAX_VALUE)
+        );
+        jp_demepenoLayout.setVerticalGroup(
+            jp_demepenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
+
+        jp_main.add(jp_demepeno, "card3");
+
+        javax.swing.GroupLayout jp_matematicasLayout = new javax.swing.GroupLayout(jp_matematicas);
+        jp_matematicas.setLayout(jp_matematicasLayout);
+        jp_matematicasLayout.setHorizontalGroup(
+            jp_matematicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 979, Short.MAX_VALUE)
+        );
+        jp_matematicasLayout.setVerticalGroup(
+            jp_matematicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
+
+        jp_main.add(jp_matematicas, "card4");
+
+        javax.swing.GroupLayout jp_compresionLayout = new javax.swing.GroupLayout(jp_compresion);
+        jp_compresion.setLayout(jp_compresionLayout);
+        jp_compresionLayout.setHorizontalGroup(
+            jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 979, Short.MAX_VALUE)
+        );
+        jp_compresionLayout.setVerticalGroup(
+            jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
+
+        jp_main.add(jp_compresion, "card5");
+
+        javax.swing.GroupLayout jp_menorLayout = new javax.swing.GroupLayout(jp_menor);
+        jp_menor.setLayout(jp_menorLayout);
+        jp_menorLayout.setHorizontalGroup(
+            jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 979, Short.MAX_VALUE)
+        );
+        jp_menorLayout.setVerticalGroup(
+            jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
+
+        jp_main.add(jp_menor, "card6");
+
+        javax.swing.GroupLayout jp_arbolLayout = new javax.swing.GroupLayout(jp_arbol);
+        jp_arbol.setLayout(jp_arbolLayout);
+        jp_arbolLayout.setHorizontalGroup(
+            jp_arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 979, Short.MAX_VALUE)
+        );
+        jp_arbolLayout.setVerticalGroup(
+            jp_arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
+
+        jp_main.add(jp_arbol, "card7");
+
         jp_header.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jp_header.setName("Header"); // NOI18N
 
-        jLabel1.setText("jLabel1");
+        jb_laberinto.setText("Laberinto");
+
+        jb_desempeno.setText("Evaluación de Desempeño");
+
+        jb_matematicas.setText("Expresiones Matemáticas");
+
+        jb_compresion.setText("Compresión de Archivos de Texto");
+
+        jb_MenorCosto.setText("Menor Costo");
+
+        jb_arbol.setText("Árbol de Expansión");
+
+        jb_salir.setText("Salir");
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout jp_headerLayout = new javax.swing.GroupLayout(jp_header);
         jp_header.setLayout(jp_headerLayout);
@@ -48,14 +168,56 @@ public class App extends javax.swing.JFrame {
             jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp_headerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(800, Short.MAX_VALUE))
+                .addComponent(jb_laberinto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_desempeno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_matematicas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_compresion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_MenorCosto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jb_arbol)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_salir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jp_headerLayout.setVerticalGroup(
             jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_headerLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addGroup(jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jb_matematicas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jSeparator1)
+                        .addComponent(jb_laberinto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jb_desempeno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jb_compresion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jb_MenorCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jb_arbol, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jb_salir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -71,7 +233,7 @@ public class App extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jp_header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jp_main, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE))
+                .addComponent(jp_main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,8 +275,26 @@ public class App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JButton jb_MenorCosto;
+    private javax.swing.JButton jb_arbol;
+    private javax.swing.JButton jb_compresion;
+    private javax.swing.JButton jb_desempeno;
+    private javax.swing.JButton jb_laberinto;
+    private javax.swing.JButton jb_matematicas;
+    private javax.swing.JButton jb_salir;
+    private javax.swing.JPanel jp_arbol;
+    private javax.swing.JPanel jp_compresion;
+    private javax.swing.JPanel jp_demepeno;
     private javax.swing.JPanel jp_header;
+    private javax.swing.JPanel jp_laberinto;
     private javax.swing.JPanel jp_main;
+    private javax.swing.JPanel jp_matematicas;
+    private javax.swing.JPanel jp_menor;
     // End of variables declaration//GEN-END:variables
 }
