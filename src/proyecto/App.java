@@ -5,6 +5,8 @@
  */
 package proyecto;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author Suazo
@@ -29,7 +31,9 @@ public class App extends javax.swing.JFrame {
 
         jp_main = new javax.swing.JPanel();
         jp_laberinto = new javax.swing.JPanel();
-        jp_demepeno = new javax.swing.JPanel();
+        jp_LabGraphics = jp_LabGraphics = new Laberinto(500, 400);
+        jp_cargarLab = new javax.swing.JButton();
+        jp_desempeno = new javax.swing.JPanel();
         jp_matematicas = new javax.swing.JPanel();
         jp_compresion = new javax.swing.JPanel();
         jp_menor = new javax.swing.JPanel();
@@ -55,100 +59,169 @@ public class App extends javax.swing.JFrame {
         jp_main.setName("Main"); // NOI18N
         jp_main.setLayout(new java.awt.CardLayout());
 
+        jp_LabGraphics.setBackground(new java.awt.Color(255, 255, 255));
+        jp_LabGraphics.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jp_LabGraphics.setPreferredSize(new java.awt.Dimension(500, 400));
+
+        javax.swing.GroupLayout jp_LabGraphicsLayout = new javax.swing.GroupLayout(jp_LabGraphics);
+        jp_LabGraphics.setLayout(jp_LabGraphicsLayout);
+        jp_LabGraphicsLayout.setHorizontalGroup(
+            jp_LabGraphicsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 421, Short.MAX_VALUE)
+        );
+        jp_LabGraphicsLayout.setVerticalGroup(
+            jp_LabGraphicsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 396, Short.MAX_VALUE)
+        );
+
+        jp_cargarLab.setText("Cargar Laberinto");
+        jp_cargarLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jp_cargarLabActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jp_laberintoLayout = new javax.swing.GroupLayout(jp_laberinto);
         jp_laberinto.setLayout(jp_laberintoLayout);
         jp_laberintoLayout.setHorizontalGroup(
             jp_laberintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 979, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_laberintoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jp_cargarLab)
+                .addGap(286, 286, 286))
+            .addGroup(jp_laberintoLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jp_LabGraphics, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(494, Short.MAX_VALUE))
         );
         jp_laberintoLayout.setVerticalGroup(
             jp_laberintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGroup(jp_laberintoLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jp_LabGraphics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jp_cargarLab)
+                .addContainerGap())
         );
 
-        jp_main.add(jp_laberinto, "card2");
+        jp_main.add(jp_laberinto, "laberinto");
 
-        javax.swing.GroupLayout jp_demepenoLayout = new javax.swing.GroupLayout(jp_demepeno);
-        jp_demepeno.setLayout(jp_demepenoLayout);
-        jp_demepenoLayout.setHorizontalGroup(
-            jp_demepenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 979, Short.MAX_VALUE)
+        javax.swing.GroupLayout jp_desempenoLayout = new javax.swing.GroupLayout(jp_desempeno);
+        jp_desempeno.setLayout(jp_desempenoLayout);
+        jp_desempenoLayout.setHorizontalGroup(
+            jp_desempenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 964, Short.MAX_VALUE)
         );
-        jp_demepenoLayout.setVerticalGroup(
-            jp_demepenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+        jp_desempenoLayout.setVerticalGroup(
+            jp_desempenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
 
-        jp_main.add(jp_demepeno, "card3");
+        jp_main.add(jp_desempeno, "desempeno");
 
         javax.swing.GroupLayout jp_matematicasLayout = new javax.swing.GroupLayout(jp_matematicas);
         jp_matematicas.setLayout(jp_matematicasLayout);
         jp_matematicasLayout.setHorizontalGroup(
             jp_matematicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 979, Short.MAX_VALUE)
+            .addGap(0, 964, Short.MAX_VALUE)
         );
         jp_matematicasLayout.setVerticalGroup(
             jp_matematicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
 
-        jp_main.add(jp_matematicas, "card4");
+        jp_main.add(jp_matematicas, "matematicas");
 
         javax.swing.GroupLayout jp_compresionLayout = new javax.swing.GroupLayout(jp_compresion);
         jp_compresion.setLayout(jp_compresionLayout);
         jp_compresionLayout.setHorizontalGroup(
             jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 979, Short.MAX_VALUE)
+            .addGap(0, 964, Short.MAX_VALUE)
         );
         jp_compresionLayout.setVerticalGroup(
             jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
 
-        jp_main.add(jp_compresion, "card5");
+        jp_main.add(jp_compresion, "compresion");
 
         javax.swing.GroupLayout jp_menorLayout = new javax.swing.GroupLayout(jp_menor);
         jp_menor.setLayout(jp_menorLayout);
         jp_menorLayout.setHorizontalGroup(
             jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 979, Short.MAX_VALUE)
+            .addGap(0, 964, Short.MAX_VALUE)
         );
         jp_menorLayout.setVerticalGroup(
             jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
 
-        jp_main.add(jp_menor, "card6");
+        jp_main.add(jp_menor, "menor");
 
         javax.swing.GroupLayout jp_arbolLayout = new javax.swing.GroupLayout(jp_arbol);
         jp_arbol.setLayout(jp_arbolLayout);
         jp_arbolLayout.setHorizontalGroup(
             jp_arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 979, Short.MAX_VALUE)
+            .addGap(0, 964, Short.MAX_VALUE)
         );
         jp_arbolLayout.setVerticalGroup(
             jp_arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
 
-        jp_main.add(jp_arbol, "card7");
+        jp_main.add(jp_arbol, "arbol");
 
         jp_header.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jp_header.setName("Header"); // NOI18N
 
         jb_laberinto.setText("Laberinto");
+        jb_laberinto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_laberintoActionPerformed(evt);
+            }
+        });
 
         jb_desempeno.setText("Evaluación de Desempeño");
+        jb_desempeno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_desempenoActionPerformed(evt);
+            }
+        });
 
         jb_matematicas.setText("Expresiones Matemáticas");
+        jb_matematicas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_matematicasActionPerformed(evt);
+            }
+        });
 
         jb_compresion.setText("Compresión de Archivos de Texto");
+        jb_compresion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_compresionActionPerformed(evt);
+            }
+        });
 
         jb_MenorCosto.setText("Menor Costo");
+        jb_MenorCosto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_MenorCostoActionPerformed(evt);
+            }
+        });
 
         jb_arbol.setText("Árbol de Expansión");
+        jb_arbol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_arbolActionPerformed(evt);
+            }
+        });
 
         jb_salir.setText("Salir");
+        jb_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_salirActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -191,9 +264,9 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jb_arbol)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jb_salir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jp_headerLayout.setVerticalGroup(
             jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,6 +312,44 @@ public class App extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jb_laberintoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_laberintoActionPerformed
+        CardLayout card = (CardLayout) jp_main.getLayout();
+        card.show(jp_main, "laberinto");
+    }//GEN-LAST:event_jb_laberintoActionPerformed
+
+    private void jb_desempenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_desempenoActionPerformed
+        CardLayout card = (CardLayout) jp_main.getLayout();
+        card.show(jp_main, "desempeno");
+    }//GEN-LAST:event_jb_desempenoActionPerformed
+
+    private void jb_matematicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_matematicasActionPerformed
+        CardLayout card = (CardLayout) jp_main.getLayout();
+        card.show(jp_main, "matematicas");
+    }//GEN-LAST:event_jb_matematicasActionPerformed
+
+    private void jb_compresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_compresionActionPerformed
+        CardLayout card = (CardLayout) jp_main.getLayout();
+        card.show(jp_main, "compresion");
+    }//GEN-LAST:event_jb_compresionActionPerformed
+
+    private void jb_MenorCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_MenorCostoActionPerformed
+        CardLayout card = (CardLayout) jp_main.getLayout();
+        card.show(jp_main, "menor");
+    }//GEN-LAST:event_jb_MenorCostoActionPerformed
+
+    private void jb_arbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_arbolActionPerformed
+        CardLayout card = (CardLayout) jp_main.getLayout();
+        card.show(jp_main, "arbol");
+    }//GEN-LAST:event_jb_arbolActionPerformed
+
+    private void jb_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jb_salirActionPerformed
+
+    private void jp_cargarLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jp_cargarLabActionPerformed
+        jp_LabGraphics = new Laberinto(jp_LabGraphics.getWidth(), jp_LabGraphics.getHeight());
+    }//GEN-LAST:event_jp_cargarLabActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -250,7 +361,7 @@ public class App extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -288,9 +399,11 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jb_laberinto;
     private javax.swing.JButton jb_matematicas;
     private javax.swing.JButton jb_salir;
+    private javax.swing.JPanel jp_LabGraphics;
     private javax.swing.JPanel jp_arbol;
+    private javax.swing.JButton jp_cargarLab;
     private javax.swing.JPanel jp_compresion;
-    private javax.swing.JPanel jp_demepeno;
+    private javax.swing.JPanel jp_desempeno;
     private javax.swing.JPanel jp_header;
     private javax.swing.JPanel jp_laberinto;
     private javax.swing.JPanel jp_main;
