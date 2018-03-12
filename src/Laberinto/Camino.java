@@ -3,16 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto.TDA;
+package Laberinto;
 
 /**
  *
  * @author Suazo
  */
-public class Muro extends Casilla{
+public class Camino extends Casilla{
     
-    public Muro(int x, int y) {
-        super(x, y);
+    public boolean recorrido;
+    public boolean ruta;
+    
+    public Camino(int y, int x) {
+        super(y, x);
+        recorrido = false;
+        ruta = false;
     }
     
 }
