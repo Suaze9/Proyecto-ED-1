@@ -141,11 +141,12 @@
                               <Component id="jp_step" max="32767" attributes="0"/>
                               <Component id="jp_5steps" max="32767" attributes="0"/>
                               <Component id="jp_10steps" max="32767" attributes="0"/>
+                              <Component id="jp_15steps" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jp_15steps" max="32767" attributes="0"/>
+                              <Component id="jb_25steps" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -170,7 +171,9 @@
                           <Component id="jp_10steps" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jp_15steps" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="99" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jb_25steps" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="70" max="32767" attributes="0"/>
                           <Component id="jSeparator7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jp_recorrerLab" min="-2" max="-2" attributes="0"/>
@@ -255,6 +258,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jp_15stepsActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jb_25steps">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="25 Steps"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_25stepsActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
