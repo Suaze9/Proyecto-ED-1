@@ -24,7 +24,7 @@ public class NodeTree {
     }
 
     public NodeTree getPadre() {
-        return padre;
+        return padre; 
     }
 
     public void setPadre(NodeTree padre) {
