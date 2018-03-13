@@ -2,12 +2,12 @@ package proyecto.TDA;
 
 public interface Tree {
     
-    public Object padre(NodeTree nodo);
-    public Object hijo_izq(NodeTree nodo);
-    public Object hijo_der(NodeTree nodo);
-    public String etiqueta(NodeTree nodo);
-    public boolean crear(Tree arbol1, Tree arbol2);
-    public Object raiz();
+    public BinaryTree padre();
+    public BinaryTree hijo_izq();
+    public BinaryTree hijo_der();
+    public Object etiqueta();
+    public BinaryTree crear(BinaryTree arbol);
+    public BinaryTree raiz();
     public boolean anula();
     
 }
