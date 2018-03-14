@@ -5,10 +5,13 @@
  */
 package proyecto;
 
+import Hoffman.Codigo_Hoffman;
+import Hoffman.Letra;
 import Laberinto.Laberinto;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -341,6 +344,9 @@ public class App extends javax.swing.JFrame {
         jp_desempeno = new javax.swing.JPanel();
         jp_matematicas = new javax.swing.JPanel();
         jp_compresion = new javax.swing.JPanel();
+        jb_comprimir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ta_frase = new javax.swing.JTextArea();
         jp_menor = new javax.swing.JPanel();
         jp_arbol = new javax.swing.JPanel();
         jp_header = new javax.swing.JPanel();
@@ -543,15 +549,38 @@ public class App extends javax.swing.JFrame {
 
         jp_main.add(jp_matematicas, "matematicas");
 
+        jb_comprimir.setText("Comprimir");
+        jb_comprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_comprimirMouseClicked(evt);
+            }
+        });
+
+        ta_frase.setColumns(20);
+        ta_frase.setRows(5);
+        jScrollPane1.setViewportView(ta_frase);
+
         javax.swing.GroupLayout jp_compresionLayout = new javax.swing.GroupLayout(jp_compresion);
         jp_compresion.setLayout(jp_compresionLayout);
         jp_compresionLayout.setHorizontalGroup(
             jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 975, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_compresionLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(jb_comprimir)
+                .addContainerGap(460, Short.MAX_VALUE))
         );
         jp_compresionLayout.setVerticalGroup(
             jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGroup(jp_compresionLayout.createSequentialGroup()
+                .addContainerGap(99, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(156, 156, 156))
+            .addGroup(jp_compresionLayout.createSequentialGroup()
+                .addGap(199, 199, 199)
+                .addComponent(jb_comprimir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jp_main.add(jp_compresion, "compresion");
@@ -806,6 +835,17 @@ public class App extends javax.swing.JFrame {
         jp_LabGraphics.repaint();
     }//GEN-LAST:event_jb_25stepsActionPerformed
 
+    private void jb_comprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_comprimirMouseClicked
+        try {
+            String frase = ta_frase.getText();
+            Codigo_Hoffman hoffman = new Codigo_Hoffman(frase);
+            ArrayList<Letra> letras = hoffman.Letras();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Upss");
+        }
+    }//GEN-LAST:event_jb_comprimirMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -845,6 +885,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_Laberintos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -858,6 +899,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jb_arbol;
     private javax.swing.JButton jb_cargarLaberinto;
     private javax.swing.JButton jb_compresion;
+    private javax.swing.JButton jb_comprimir;
     private javax.swing.JButton jb_desempeno;
     private javax.swing.JButton jb_laberinto;
     private javax.swing.JButton jb_matematicas;
@@ -877,5 +919,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jp_recorrerLab;
     private javax.swing.JButton jp_reiniciarLab;
     private javax.swing.JButton jp_step;
+    private javax.swing.JTextArea ta_frase;
     // End of variables declaration//GEN-END:variables
 }

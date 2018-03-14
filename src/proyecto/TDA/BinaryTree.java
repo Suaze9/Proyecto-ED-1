@@ -54,9 +54,9 @@ public class BinaryTree implements Tree{
     }
 
     @Override
-    public BinaryTree crear(BinaryTree arbol) {
-        BinaryTree nuevo_arbol = null;
-        
+    public BinaryTree crear(BinaryTree arbol2, Object etiqueta, boolean Raiz) {
+        BinaryTree arbol1 = new BinaryTree(padre, data, hijo_izq, hijo_der, raiz);
+        BinaryTree nuevo_arbol = new BinaryTree(null, etiqueta, arbol1, arbol2, Raiz);
         return nuevo_arbol;
     }
 
