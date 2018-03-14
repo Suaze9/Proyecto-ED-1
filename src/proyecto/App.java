@@ -5,6 +5,7 @@
  */
 package proyecto;
 
+import ExpresionesMatematicas.Calculadora;
 import Hoffman.Codigo_Hoffman;
 import Hoffman.Letra;
 import Laberinto.Laberinto;
@@ -343,6 +344,13 @@ public class App extends javax.swing.JFrame {
         jb_25steps = new javax.swing.JButton();
         jp_desempeno = new javax.swing.JPanel();
         jp_matematicas = new javax.swing.JPanel();
+        jtf_respuesta = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jtf_problema = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
         jp_compresion = new javax.swing.JPanel();
         jb_comprimir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -536,15 +544,57 @@ public class App extends javax.swing.JFrame {
 
         jp_main.add(jp_desempeno, "desempeno");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Problema Matematico");
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton1.setText("Resovler");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Respuesta");
+
         javax.swing.GroupLayout jp_matematicasLayout = new javax.swing.GroupLayout(jp_matematicas);
         jp_matematicas.setLayout(jp_matematicasLayout);
         jp_matematicasLayout.setHorizontalGroup(
             jp_matematicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 975, Short.MAX_VALUE)
+            .addGroup(jp_matematicasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jp_matematicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtf_respuesta)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator9)
+                    .addComponent(jSeparator10)
+                    .addComponent(jtf_problema)
+                    .addGroup(jp_matematicasLayout.createSequentialGroup()
+                        .addGroup(jp_matematicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(0, 824, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jp_matematicasLayout.setVerticalGroup(
             jp_matematicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGroup(jp_matematicasLayout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jtf_problema, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtf_respuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         jp_main.add(jp_matematicas, "matematicas");
@@ -846,6 +896,18 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jb_comprimirMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String problema = jtf_problema.getText();
+        String respuesta="";
+        try{
+            Calculadora calc = new Calculadora();
+            respuesta = calc.Solucion(problema);
+        }catch(Exception e){
+            
+        }
+        jtf_respuesta.setText(respuesta);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -883,10 +945,14 @@ public class App extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_Laberintos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -894,6 +960,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JButton jb_25steps;
     private javax.swing.JButton jb_MenorCosto;
     private javax.swing.JButton jb_arbol;
@@ -919,6 +986,8 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jp_recorrerLab;
     private javax.swing.JButton jp_reiniciarLab;
     private javax.swing.JButton jp_step;
+    private javax.swing.JTextField jtf_problema;
+    private javax.swing.JTextField jtf_respuesta;
     private javax.swing.JTextArea ta_frase;
     // End of variables declaration//GEN-END:variables
 }

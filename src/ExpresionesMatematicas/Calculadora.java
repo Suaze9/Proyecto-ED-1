@@ -11,12 +11,16 @@ public class Calculadora {
         
     }
     
-    public String Solucion(){
-        return null;
+    public String Solucion(String problema){
+        return Expresion(problema);
     }
     
-    private void Expresion(){
-        
+    private String Expresion(String problema){
+        problema = Multiplicacion(problema);
+        problema = Division(problema);
+        problema = Suma(problema);
+        problema = Resta(problema);
+        return problema;
     }
     
     private String Multiplicacion(String problema){
@@ -28,11 +32,11 @@ public class Calculadora {
                 if (temp.charAt(i) == '*') {
                     String[] mult = temp.split("\\*");
                     while(mult.length != 1) {
-                        float factorA = Float.parseFloat(mult[0]);
-                        float factorB = Float.parseFloat(mult[1]);
-                        float producto = factorA * factorB;
+                        double factorA = Double.parseDouble(mult[0]);
+                        double factorB = Double.parseDouble(mult[1]);
+                        double producto = factorA * factorB;
                         String[] tempMult = new String[mult.length-1];
-                        tempMult[0] = Float.toString(producto);
+                        tempMult[0] = Double.toString(producto);
                         for (int j = 1; j < tempMult.length; j++) {
                             tempMult[j] = mult[j+1];
                         }
@@ -87,11 +91,11 @@ public class Calculadora {
                 if (temp.charAt(i) == '/') {
                     String[] div = temp.split("\\/");
                     while(div.length != 1) {
-                        float divisor = Float.parseFloat(div[0]);
-                        float dividendo = Float.parseFloat(div[1]);
-                        float cociente = divisor / dividendo;
+                        double divisor = Double.parseDouble(div[0]);
+                        double dividendo = Double.parseDouble(div[1]);
+                        double cociente = divisor / dividendo;
                         String[] tempMult = new String[div.length-1];
-                        tempMult[0] = Float.toString(cociente);
+                        tempMult[0] = Double.toString(cociente);
                         for (int j = 1; j < tempMult.length; j++) {
                             tempMult[j] = div[j+1];
                         }
@@ -146,11 +150,11 @@ public class Calculadora {
                 if (temp.charAt(i) == '-') {
                     String[] resta = temp.split("\\-");
                     while(resta.length != 1) {
-                        float numeroA = Float.parseFloat(resta[0]);
-                        float numeroB = Float.parseFloat(resta[1]);
-                        float resultado = numeroA - numeroB;
+                        double numeroA = Double.parseDouble(resta[0]);
+                        double numeroB = Double.parseDouble(resta[1]);
+                        double resultado = numeroA - numeroB;
                         String[] tempResta = new String[resta.length-1];
-                        tempResta[0] = Float.toString(resultado);
+                        tempResta[0] = Double.toString(resultado);
                         for (int j = 1; j < tempResta.length; j++) {
                             tempResta[j] = resta[j+1];
                         }
@@ -205,11 +209,11 @@ public class Calculadora {
                 if (temp.charAt(i) == '+') {
                     String[] sum = temp.split("\\+");
                     while(sum.length != 1) {
-                        float numeroA = Float.parseFloat(sum[0]);
-                        float numeroB = Float.parseFloat(sum[1]);
-                        float resultado = numeroA + numeroB;
+                        double numeroA = Double.parseDouble(sum[0]);
+                        double numeroB = Double.parseDouble(sum[1]);
+                        double resultado = numeroA + numeroB;
                         String[] tempResta = new String[sum.length-1];
-                        tempResta[0] = Float.toString(resultado);
+                        tempResta[0] = Double.toString(resultado);
                         for (int j = 1; j < tempResta.length; j++) {
                             tempResta[j] = sum[j+1];
                         }
@@ -253,14 +257,6 @@ public class Calculadora {
             }
         }
         return queueSuma;
-    }
-    
-    private void Parentesis(String problema){
-        for (int i = 0; i < problema.length(); i++) {
-            if (true) {
-                
-            }
-        }
     }
     
 }
