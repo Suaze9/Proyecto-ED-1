@@ -9,7 +9,7 @@ package proyecto.TDA;
  *
  * @author usuario
  */
-public class BinaryTree implements Tree{
+public class BinaryTree implements ADTBinaryTree{
 
     public Object data;
     public BinaryTree hijo_izq;

@@ -1,6 +1,6 @@
 package proyecto.TDA;
 
-public interface Tree {
+public interface ADTBinaryTree {
     
     public BinaryTree hijo_izq();
     public BinaryTree hijo_der();

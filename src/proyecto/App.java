@@ -1000,7 +1000,7 @@ public class App extends javax.swing.JFrame {
                     char caracter = (char)Integer.parseInt(binario, 2);
                     frase_final2 += caracter;
                     String temporal = "";
-                    for (int i = 7; i < frase_final.length(); i++) {
+                    for (int i = 8; i < frase_final.length(); i++) {
                         temporal += frase_final.charAt(i);
                     }
                     frase_final = temporal;
