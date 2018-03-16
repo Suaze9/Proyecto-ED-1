@@ -18,24 +18,17 @@ public class BinaryTree implements Tree{
     public boolean raiz = false;
 
     public BinaryTree() {
-        this.padre = null;
         this.data = null;
         this.hijo_izq = null;
         this.hijo_der = null;
         raiz = false;
     }
 
-    public BinaryTree(BinaryTree padre, Object data, BinaryTree hijo_izq, BinaryTree hijo_der, boolean raiz2) {
-        this.padre = padre;
+    public BinaryTree(Object data, BinaryTree hijo_izq, BinaryTree hijo_der, boolean raiz2) {
         this.data = data;
         this.hijo_izq = hijo_izq;
         this.hijo_der = hijo_der;
         raiz = raiz2;
-    }
-
-    @Override
-    public BinaryTree padre() {
-        return padre;
     }
 
     @Override
@@ -55,36 +48,18 @@ public class BinaryTree implements Tree{
 
     @Override
     public BinaryTree crear(BinaryTree arbol2, Object etiqueta, boolean Raiz) {
-        BinaryTree arbol1 = new BinaryTree(padre, data, hijo_izq, hijo_der, raiz);
-        BinaryTree nuevo_arbol = new BinaryTree(null, etiqueta, arbol1, arbol2, Raiz);
+        BinaryTree arbol1 = new BinaryTree(data, hijo_izq, hijo_der, raiz);
+        BinaryTree nuevo_arbol = new BinaryTree(etiqueta, arbol1, arbol2, Raiz);
         return nuevo_arbol;
     }
 
     @Override
-    public BinaryTree raiz() {
-        if (raiz) {
-            return padre;
-        } else {
-            return null;
-        }
-    }
-
-    @Override
     public boolean anula() {
-        padre = null;
         hijo_izq = null;
         hijo_der = null;
         data = null;
         raiz = false;
         return true;
-    }
-
-    public BinaryTree getPadre() {
-        return padre;
-    }
-
-    public void setPadre(BinaryTree padre) {
-        this.padre = padre;
     }
 
     public Object getData() {
@@ -119,5 +94,13 @@ public class BinaryTree implements Tree{
         this.raiz = raiz;
     }
 
+    public BinaryTree getPadre() {
+        return padre;
+    }
+
+    public void setPadre(BinaryTree padre) {
+        this.padre = padre;
+    }
+    
     
 }
