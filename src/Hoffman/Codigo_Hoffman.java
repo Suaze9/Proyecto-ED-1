@@ -55,32 +55,42 @@ public class Codigo_Hoffman {
         do {
             BinaryTree arbol1 = new BinaryTree();
             BinaryTree arbol2 = new BinaryTree();
+            BinaryTree arbol_temporal = new BinaryTree();
             int menor = 0;
             int contador = 0;
-            for (int i = 0; i < arboles.size(); i++) {
-                if (((Letra) arboles.get(i).getData()).getCantidad() >= menor) {
-                    menor = ((Letra) arboles.get(i).getData()).getCantidad();
-                    if (contador == 0) {
-                        arbol1 = arboles.get(i);
-                        arbol1.setRaiz(false);
-                        contador++;
+            while (contador != 2) {
+                for (int i = 0; i < arboles.size(); i++) {
+                    if (i == 0) {
+                        for (int j = 0; j < arboles.size(); j++) {
+                            if (((Letra) arboles.get(j).getData()).getCantidad() >= menor) {
+                                menor = ((Letra) arboles.get(j).getData()).getCantidad();
+                            }
+                        }
+                    }
+                    if (contador == 1 && arboles.get(i) == arbol1) {
                     } else {
-                        if (contador == 1) {
-                            arbol2 = arboles.get(i);
-                            arbol2.setRaiz(false);
-                            contador++;
+                        if (((Letra) arboles.get(i).getData()).getCantidad() <= menor) {
+                            menor = ((Letra) arboles.get(i).getData()).getCantidad();
+                            arbol_temporal = arboles.get(i);
                         }
                     }
                 }
+                if (contador == 0) {
+                    arbol1 = arbol_temporal;
+                    arbol1.setRaiz(false);
+                } else {
+                    if (contador == 1) {
+                        arbol2 = arbol_temporal;
+                        arbol2.setRaiz(false);
+                    }
+                }
+                contador++;
             }
             Letra letra = new Letra('.', ((Letra) arbol1.getData()).getCantidad() + ((Letra) arbol2.getData()).getCantidad());
-            BinaryTree arbol3 = new BinaryTree();
-            arbol1.setPadre(arbol3);
-            arbol2.setPadre(arbol3);
-            arbol3 = arbol1.crear(arbol2, letra, true);
+            BinaryTree arbol3 = arbol1.crear(arbol2, letra, true);
+            arboles.add(arbol3);
             arboles.remove(arbol1);
             arboles.remove(arbol2);
-            arboles.add(arbol3);
             if (arboles.size() == 1) {
                 salir = true;
             }

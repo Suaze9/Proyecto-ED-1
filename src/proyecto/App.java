@@ -29,6 +29,7 @@ public class App extends javax.swing.JFrame {
      */
     public App() {
         initComponents();
+        this.setLocationRelativeTo(this);
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_Laberintos.getModel();
         listaLaberintos = LabeintosDefault();
         for (int i = 0; i < listaLaberintos.size(); i++) {
@@ -36,10 +37,10 @@ public class App extends javax.swing.JFrame {
         }
         cb_Laberintos.setModel(modelo);
     }
-
+    
     private ArrayList<int[][]> LabeintosDefault() {
         ArrayList tempLab = new ArrayList();
-
+        
         tempLab.add(new int[][]{
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -238,7 +239,7 @@ public class App extends javax.swing.JFrame {
             {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}
         });
-
+        
         tempLab.add(new int[][]{
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,},
             {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1,},
@@ -312,7 +313,7 @@ public class App extends javax.swing.JFrame {
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}
         });
-
+        
         return tempLab;
     }
 
@@ -930,40 +931,82 @@ public class App extends javax.swing.JFrame {
                     
                 }
             }*/
-            boolean salir = false;
             BinaryTree arbol_temporal = arbol;
+            BinaryTree arbol_temporal2 = new BinaryTree();
             ArrayList<Letra_Binaria> letras_binarias = new ArrayList();
             ArrayList<Integer> numeros = new ArrayList();
+            ArrayList<BinaryTree> visitados = new ArrayList();
+            int contador2 = 0;
             do {
+                boolean entrar1 = true;
                 if (arbol_temporal.getHijo_izq() != null) {
-                    arbol_temporal = arbol_temporal.getHijo_izq();
-                    numeros.add(0);
-                } else {
-                    if (arbol_temporal.getHijo_der() != null) {
-                        arbol_temporal = arbol_temporal.getHijo_der();
-                        numeros.add(1);
-                    } else {
-                        if (arbol_temporal.getPadre() != null) {
-                            arbol_temporal = arbol_temporal.getPadre();
-                            numeros.remove(numeros.size() - 1);
-                        } else {
-                            Letra_Binaria lb = new Letra_Binaria(((Letra) arbol_temporal.getData()).getCaracter());
-                            lb.setNumeros(numeros);
-                            letras_binarias.add(lb);
-                            numeros.clear();
-                            salir = true;
+                    for (int i = 0; i < visitados.size(); i++) {
+                        if (visitados.get(i) == arbol_temporal.getHijo_izq()) {
+                            entrar1 = false;
                         }
                     }
                 }
-            } while (!salir);
-            String frase_final = "";
-            for (int i = 0; i < letras_binarias.size(); i++) {
-                for (int j = 0; j < letras_binarias.get(i).getNumeros().size(); j++) {
-                    frase_final += letras_binarias.get(i).getNumeros().get(j);
+                boolean entrar2 = true;
+                if (arbol_temporal.getHijo_der() != null) {
+                    for (int i = 0; i < visitados.size(); i++) {
+                        if (visitados.get(i) == arbol_temporal.getHijo_der()) {
+                            entrar2 = false;
+                        }
+                    }
                 }
-                frase_final += " ";
+                if (arbol_temporal.getHijo_izq() != null && entrar1) {
+                    arbol_temporal2 = arbol_temporal;
+                    arbol_temporal = arbol_temporal.getHijo_izq();
+                    numeros.add(0);
+                } else {
+                    if (arbol_temporal.getHijo_der() != null && entrar2) {
+                        arbol_temporal2 = arbol_temporal;
+                        arbol_temporal = arbol_temporal.getHijo_der();
+                        numeros.add(1);
+                    } else {
+                        Letra_Binaria lb = new Letra_Binaria(((Letra) arbol_temporal.getData()).getCaracter());
+                        for (int i = 0; i < numeros.size(); i++) {
+                            lb.getNumeros().add(numeros.get(i));
+                        }
+                        letras_binarias.add(lb);
+                        numeros.remove(numeros.size() - 1);
+                        visitados.add(arbol_temporal);
+                        arbol_temporal = arbol_temporal2;
+                        contador2++;
+                    }
+                }
+            } while (contador2 != letras.size());
+            String frase_final = "";
+            for (int i = 0; i < frase.length(); i++) {
+                for (int j = 0; j < letras_binarias.size(); j++) {
+                    if (frase.charAt(i) == letras_binarias.get(j).getCaracter()) {
+                        for (int k = 0; k < letras_binarias.get(j).getNumeros().size(); k++) {
+                            frase_final += letras_binarias.get(j).getNumeros().get(k) + "";
+                        }
+                    }
+                }
             }
-            ta_frase1.setText(frase_final);
+            boolean salir = false;
+            String frase_final2 = "";
+            do {
+                if (frase_final.length() < 8) {
+                    frase_final2 += frase_final;
+                    salir = true;
+                } else {
+                    String binario = "";
+                    for (int i = 0; i < 8; i++) {
+                        binario += frase_final.charAt(i);
+                    }
+                    char caracter = (char)Integer.parseInt(binario, 2);
+                    frase_final2 += caracter;
+                    String temporal = "";
+                    for (int i = 7; i < frase_final.length(); i++) {
+                        temporal += frase_final.charAt(i);
+                    }
+                    frase_final = temporal;
+                }
+            } while (!salir);
+            ta_frase1.setText(frase_final2);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Upss");
         }
@@ -976,7 +1019,7 @@ public class App extends javax.swing.JFrame {
             Calculadora calc = new Calculadora();
             respuesta = calc.Solucion(problema);
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(this, "Upss");
         }
         jtf_respuesta.setText(respuesta);
     }//GEN-LAST:event_jButton1ActionPerformed

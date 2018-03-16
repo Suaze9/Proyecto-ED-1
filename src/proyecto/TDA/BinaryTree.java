@@ -11,7 +11,6 @@ package proyecto.TDA;
  */
 public class BinaryTree implements Tree{
 
-    public BinaryTree padre;
     public Object data;
     public BinaryTree hijo_izq;
     public BinaryTree hijo_der;
@@ -48,7 +47,7 @@ public class BinaryTree implements Tree{
 
     @Override
     public BinaryTree crear(BinaryTree arbol2, Object etiqueta, boolean Raiz) {
-        BinaryTree arbol1 = new BinaryTree(data, hijo_izq, hijo_der, raiz);
+        BinaryTree arbol1 = new BinaryTree(this.data, this.hijo_izq, this.hijo_der, raiz);
         BinaryTree nuevo_arbol = new BinaryTree(etiqueta, arbol1, arbol2, Raiz);
         return nuevo_arbol;
     }
@@ -94,13 +93,4 @@ public class BinaryTree implements Tree{
         this.raiz = raiz;
     }
 
-    public BinaryTree getPadre() {
-        return padre;
-    }
-
-    public void setPadre(BinaryTree padre) {
-        this.padre = padre;
-    }
-    
-    
 }
