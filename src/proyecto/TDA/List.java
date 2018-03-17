@@ -4,6 +4,7 @@ package proyecto.TDA;
 public interface List {
     
     public boolean insert(int Pos, Object Data);
+    public boolean add(Object Data);
     public int find(Object Data);
     public Object get (int Pos);
     public boolean delete(int Pos);

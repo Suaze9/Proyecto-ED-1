@@ -1,63 +1,109 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyecto.TDA;
 
-/**
- *
- * @author usuario
- */
-public class NodeTree {
+public class NodeTree implements Tree{
     
     public NodeTree padre;
     public Object data;
-    public NodeTree hijo_izq;
-    public NodeTree hijo_der;
+    protected ArrayList hijos;
 
-    public NodeTree() {
+    public NodeTree(Object data) {
         this.padre = null;
-        data = null;
-        this.hijo_izq = null;
-        this.hijo_der = null;
-    }
-
-    public NodeTree getPadre() {
-        return padre; 
-    }
-
-    public void setPadre(NodeTree padre) {
-        this.padre = padre;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
         this.data = data;
+        hijos = new ArrayList();
     }
-
-    public NodeTree getHijo_izq() {
-        return hijo_izq;
-    }
-
-    public void setHijo_izq(NodeTree hijo_izq) {
-        this.hijo_izq = hijo_izq;
-    }
-
-    public NodeTree getHijo_der() {
-        return hijo_der;
-    }
-
-    public void setHijo_der(NodeTree hijo_der) {
-        this.hijo_der = hijo_der;
+    public NodeTree(NodeTree nodo) {
+        this.padre = null;
+        data = nodo.getData();
+        hijos = nodo.hijos;
     }
     
     @Override
-    public String toString() {
-        return data + "";
+    public Object getData() {
+        return data;
+    }
+    
+    @Override
+    public NodeTree padre() {
+        return padre;
+    }
+
+    @Override
+    public NodeTree hijoMasIzq() {
+        if (hijos.size() != 0) {
+            return (NodeTree)hijos.get(0);
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public NodeTree hermanoDer() {
+        if (padre != null) {
+            NodeTree tempPadre = this.padre;
+            int thisPos = tempPadre.hijos.find(this);
+            if (tempPadre.hijos.size()-1 > thisPos){
+                return (NodeTree)tempPadre.hijos.get(thisPos+1);
+            }else{
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public NodeTree Crea(Object data, Tree... nodos) {
+        NodeTree arbolTemp = new NodeTree(data);
+        arbolTemp.agregar(this);
+        for (Tree nodo : nodos) {
+            if (nodo instanceof NodeTree) {
+                arbolTemp.agregar(nodo);
+            }else{
+                return null;
+            }
+        }
+        return arbolTemp;
+    }
+
+    @Override
+    public NodeTree raiz() {
+        if (this.padre != null) {
+            return raiz(this.padre);
+        }else{
+            return this;
+        }
+    }
+    
+    private NodeTree raiz(NodeTree nodo) {
+        if (nodo.padre != null) {
+            Tree tempNodo = raiz(nodo.padre);
+            if (tempNodo instanceof NodeTree) {
+                return (NodeTree)tempNodo;
+            }else{
+                return null;
+            }
+        }else{
+            return nodo;
+        }
+    }
+
+    @Override
+    public NodeTree anular() {
+        if (this.padre != null) {
+            this.padre.hijos.delete(this.padre.hijos.find(this));
+            this.padre = null;
+        }
+        this.hijos = new ArrayList();
+        this.data = null;
+        return this;
+    }
+
+    @Override
+    public void agregar(Tree nodo) {
+        if (nodo instanceof NodeTree) {
+            ((NodeTree) nodo).padre = this;
+            this.hijos.add(nodo);
+        }
     }
     
 }

@@ -115,5 +115,10 @@ public class NodeList implements List{
             System.out.println("Empty");
         }
     }
+
+    @Override
+    public boolean add(Object Data) {
+        return insert(size, Data);
+    }
     
 }
