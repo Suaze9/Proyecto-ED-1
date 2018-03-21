@@ -15,7 +15,7 @@ public class ArrayStack implements Stack{
         array = new Object[CAP];
         
         for (int i = 0; i < CAP; i++) {
-            array[i] = null;
+             array[i] = null;
         }
     }
     

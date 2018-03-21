@@ -14,7 +14,7 @@ public class BinaryTree implements ADTBinaryTree{
     public Object data;
     public BinaryTree hijo_izq;
     public BinaryTree hijo_der;
-    public boolean raiz = false;
+     public boolean raiz = false;
 
     public BinaryTree() {
         this.data = null;

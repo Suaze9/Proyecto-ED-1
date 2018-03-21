@@ -11,11 +11,17 @@ import Hoffman.Letra;
 import Hoffman.Letra_Binaria;
 import Laberinto.Laberinto;
 import java.awt.CardLayout;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import proyecto.TDA.ArrayQueue;
+import proyecto.TDA.ArrayStack;
 import proyecto.TDA.BinaryTree;
 
 /**
@@ -37,10 +43,10 @@ public class App extends javax.swing.JFrame {
         }
         cb_Laberintos.setModel(modelo);
     }
-    
+
     private ArrayList<int[][]> LabeintosDefault() {
         ArrayList tempLab = new ArrayList();
-        
+
         tempLab.add(new int[][]{
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -239,7 +245,7 @@ public class App extends javax.swing.JFrame {
             {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}
         });
-        
+
         tempLab.add(new int[][]{
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,},
             {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1,},
@@ -313,7 +319,7 @@ public class App extends javax.swing.JFrame {
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}
         });
-        
+
         return tempLab;
     }
 
@@ -362,6 +368,8 @@ public class App extends javax.swing.JFrame {
         jt_arbolbinario = new javax.swing.JTree();
         jScrollPane3 = new javax.swing.JScrollPane();
         ta_frase1 = new javax.swing.JTextArea();
+        jb_descomprimir = new javax.swing.JButton();
+        jb_seleccionar = new javax.swing.JButton();
         jp_menor = new javax.swing.JPanel();
         jp_arbol = new javax.swing.JPanel();
         jp_header = new javax.swing.JPanel();
@@ -625,37 +633,61 @@ public class App extends javax.swing.JFrame {
         ta_frase1.setRows(5);
         jScrollPane3.setViewportView(ta_frase1);
 
+        jb_descomprimir.setText("Descomprimir");
+        jb_descomprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_descomprimirMouseClicked(evt);
+            }
+        });
+
+        jb_seleccionar.setText("Seleccionar Archivo");
+        jb_seleccionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_seleccionarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jp_compresionLayout = new javax.swing.GroupLayout(jp_compresion);
         jp_compresion.setLayout(jp_compresionLayout);
         jp_compresionLayout.setHorizontalGroup(
             jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_compresionLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
                 .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jp_compresionLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(jb_comprimir))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(92, 92, 92)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)))
+                    .addGroup(jp_compresionLayout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(jb_seleccionar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_compresionLayout.createSequentialGroup()
+                        .addComponent(jb_comprimir)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_descomprimir))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(91, 91, 91))
         );
         jp_compresionLayout.setVerticalGroup(
             jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp_compresionLayout.createSequentialGroup()
-                .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_compresionLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jp_compresionLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jb_comprimir))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_comprimir)
+                    .addComponent(jb_descomprimir))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jp_compresionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jb_seleccionar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
 
         jp_main.add(jp_compresion, "compresion");
@@ -920,22 +952,12 @@ public class App extends javax.swing.JFrame {
             Codigo_Hoffman hoffman = new Codigo_Hoffman(frase);
             ArrayList<Letra> letras = hoffman.Letras();
             BinaryTree arbol = hoffman.Comprimir(letras);
-            /*DefaultTreeModel m = (DefaultTreeModel) jt_arbolbinario.getModel();
-            DefaultMutableTreeNode nueva_raiz = new DefaultMutableTreeNode(((Letra)arbol.getData()).getCantidad());
-            m.setRoot(nueva_raiz);
-            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
-            boolean continuar = true;
-            BinaryTree arbol_temporal = arbol;
-            while(continuar){
-                if (arbol_temporal.getHijo_der() == null && arbol_temporal.getHijo_izq() == null) {
-                    
-                }
-            }*/
             BinaryTree arbol_temporal = arbol;
             BinaryTree arbol_temporal2 = new BinaryTree();
             ArrayList<Letra_Binaria> letras_binarias = new ArrayList();
             ArrayList<Integer> numeros = new ArrayList();
             ArrayList<BinaryTree> visitados = new ArrayList();
+            ArrayStack padres = new ArrayStack();
             int contador2 = 0;
             do {
                 boolean entrar1 = true;
@@ -955,24 +977,33 @@ public class App extends javax.swing.JFrame {
                     }
                 }
                 if (arbol_temporal.getHijo_izq() != null && entrar1) {
+                    padres.push(arbol_temporal);
                     arbol_temporal2 = arbol_temporal;
                     arbol_temporal = arbol_temporal.getHijo_izq();
                     numeros.add(0);
                 } else {
                     if (arbol_temporal.getHijo_der() != null && entrar2) {
+                        padres.push(arbol_temporal);
                         arbol_temporal2 = arbol_temporal;
                         arbol_temporal = arbol_temporal.getHijo_der();
                         numeros.add(1);
                     } else {
-                        Letra_Binaria lb = new Letra_Binaria(((Letra) arbol_temporal.getData()).getCaracter());
-                        for (int i = 0; i < numeros.size(); i++) {
-                            lb.getNumeros().add(numeros.get(i));
+                        if (entrar1 == false && entrar2 == false) {
+                            visitados.add(arbol_temporal);
+                            arbol_temporal = (BinaryTree) padres.pop();
+                            numeros.remove(numeros.size() - 1);
+                        } else {
+                            Letra_Binaria lb = new Letra_Binaria(((Letra) arbol_temporal.getData()).getCaracter());
+                            for (int i = 0; i < numeros.size(); i++) {
+                                lb.getNumeros().add(numeros.get(i));
+                            }
+                            letras_binarias.add(lb);
+                            numeros.remove(numeros.size() - 1);
+                            visitados.add(arbol_temporal);
+                            arbol_temporal = arbol_temporal2;
+                            arbol_temporal2 = (BinaryTree) padres.pop();
+                            contador2++;
                         }
-                        letras_binarias.add(lb);
-                        numeros.remove(numeros.size() - 1);
-                        visitados.add(arbol_temporal);
-                        arbol_temporal = arbol_temporal2;
-                        contador2++;
                     }
                 }
             } while (contador2 != letras.size());
@@ -986,6 +1017,7 @@ public class App extends javax.swing.JFrame {
                     }
                 }
             }
+            ta_frase1.setText(frase_final);
             boolean salir = false;
             String frase_final2 = "";
             do {
@@ -997,7 +1029,7 @@ public class App extends javax.swing.JFrame {
                     for (int i = 0; i < 8; i++) {
                         binario += frase_final.charAt(i);
                     }
-                    char caracter = (char)Integer.parseInt(binario, 2);
+                    char caracter = (char) Integer.parseInt(binario, 2);
                     frase_final2 += caracter;
                     String temporal = "";
                     for (int i = 8; i < frase_final.length(); i++) {
@@ -1007,6 +1039,215 @@ public class App extends javax.swing.JFrame {
                 }
             } while (!salir);
             ta_frase1.setText(frase_final2);
+            int contador_raiz = 0;
+            BinaryTree arbol_temp = arbol;
+            BinaryTree arbol_temp2 = new BinaryTree();
+            ArrayList<BinaryTree> visitados1 = new ArrayList();
+            ArrayStack padres1 = new ArrayStack();
+            ArrayList<Letra> letras1 = new ArrayList();
+            ArrayList<Letra> letras2 = new ArrayList();
+            boolean letra_tipo = true;
+            ArrayList<DefaultMutableTreeNode> nodos1 = new ArrayList();
+            ArrayList<DefaultMutableTreeNode> nodos2 = new ArrayList();
+            do {
+                boolean entrar1 = true;
+                if (arbol_temp.getHijo_izq() != null) {
+                    for (int i = 0; i < visitados1.size(); i++) {
+                        if (visitados1.get(i) == arbol_temp.getHijo_izq()) {
+                            entrar1 = false;
+                        }
+                    }
+                }
+                boolean entrar2 = true;
+                if (arbol_temp.getHijo_der() != null) {
+                    for (int i = 0; i < visitados1.size(); i++) {
+                        if (visitados1.get(i) == arbol_temp.getHijo_der()) {
+                            entrar2 = false;
+                        }
+                    }
+                }
+                if (arbol_temp.getHijo_izq() != null && entrar1) {
+                    padres1.push(arbol_temp);
+                    arbol_temp2 = arbol_temp;
+                    arbol_temp = arbol_temp.getHijo_izq();
+                    if (letra_tipo) {
+                        if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
+                            letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
+                            nodos1.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
+                        } else {
+                            letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
+                            nodos1.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
+                        }
+                    } else {
+                        if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
+                            letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
+                            nodos2.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
+                        } else {
+                            letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
+                            nodos2.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
+                        }
+                    }
+                } else {
+                    if (arbol_temp.getHijo_der() != null && entrar2) {
+                        padres1.push(arbol_temp);
+                        arbol_temp2 = arbol_temp;
+                        arbol_temp = arbol_temp.getHijo_der();
+                        if (letra_tipo) {
+                            if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
+                                letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
+                                nodos1.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
+                            } else {
+                                letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
+                                nodos1.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
+                            }
+                        } else {
+                            if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
+                                letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
+                                nodos2.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
+                            } else {
+                                letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
+                                nodos2.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
+                            }
+                        }
+                    } else {
+                        if (entrar1 == false && entrar2 == false) {
+                            visitados1.add(arbol_temp);
+                            arbol_temp = (BinaryTree) padres1.pop();
+                            if (arbol_temp == arbol) {
+                                contador_raiz++;
+                                letra_tipo = false;
+                            }
+                        } else {
+                            visitados1.add(arbol_temp);
+                            arbol_temp = arbol_temp2;
+                            arbol_temp2 = (BinaryTree) padres1.pop();
+                            if (arbol_temp == arbol) {
+                                contador_raiz++;
+                                letra_tipo = false;
+                            }
+                        }
+                    }
+                }
+            } while (contador_raiz < 2);
+            DefaultTreeModel m = (DefaultTreeModel) jt_arbolbinario.getModel();
+            DefaultMutableTreeNode nueva_raiz = new DefaultMutableTreeNode(((Letra) arbol.getData()).getCaracter() + " (" + ((Letra) arbol.getData()).getCantidad() + ")");
+            m.setRoot(nueva_raiz);
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+            ArrayStack nodos_padres = new ArrayStack();
+            ArrayStack letras_padres = new ArrayStack();
+            boolean salir2 = false;
+            do {
+                int numero_letra = -1;
+                for (int i = 0; i < letras1.size(); i++) {
+                    if (letras1.get(i).getTipo().equals("PadreHijo")) {
+                        numero_letra = i;
+                    }
+                }
+                if (numero_letra >= 0) {
+                    int acumulador = 0;
+                    for (int i = numero_letra + 1; i < letras1.size(); i++) {
+                        acumulador += letras1.get(i).getCantidad();
+                    }
+                    if (acumulador == letras1.get(numero_letra).getCantidad()) {
+                        for (int i = numero_letra + 1; i < letras1.size(); i++) {
+                            nodos1.get(numero_letra).add(nodos1.get(i));
+                        }
+                        letras1.get(numero_letra).setTipo("Hijo");
+                        nodos_padres.push(nodos1.get(numero_letra));
+                        letras_padres.push(letras1.get(numero_letra));
+                        int cantidad = letras1.size();
+                        for (int i = numero_letra; i < cantidad; i++) {
+                            letras1.remove(letras1.size() - 1);
+                            nodos1.remove(nodos1.size() - 1);
+                        }
+                    } else {
+                        if (acumulador > letras1.get(numero_letra).getCantidad()) {
+                            letras1.get(numero_letra).setTipo("Hijo");
+                            nodos_padres.push(nodos1.get(numero_letra));
+                            letras_padres.push(letras1.get(numero_letra));
+                            letras1.remove(letras1.size() - 1);
+                            nodos1.remove(nodos1.size() - 1);
+                        } else {
+                            letras1.add((Letra) letras_padres.pop());
+                            nodos1.add((DefaultMutableTreeNode) nodos_padres.pop());
+                        }
+                    }
+                } else {
+                    salir2 = true;
+                }
+            } while (letras1.size() > 1 && !salir2);
+            if (nodos1.isEmpty()) {
+                if (!nodos_padres.isEmpty()) {
+                    nodos1.add((DefaultMutableTreeNode) nodos_padres.pop());
+                }
+            }
+            if (nodos1.size() > 1) {
+                for (int i = 1; i < nodos1.size(); i++) {
+                    nodos1.get(0).add(nodos1.get(i));
+                }
+            }
+            while (!nodos_padres.isEmpty()) {
+                nodos1.get(0).add((DefaultMutableTreeNode) nodos_padres.pop());
+            }
+            nodos_padres = new ArrayStack();
+            letras_padres = new ArrayStack();
+            boolean salir3 = false;
+            do {
+                int numero_letra = -1;
+                for (int i = 0; i < letras2.size(); i++) {
+                    if (letras2.get(i).getTipo().equals("PadreHijo")) {
+                        numero_letra = i;
+                    }
+                }
+                if (numero_letra >= 0) {
+                    int acumulador = 0;
+                    for (int i = numero_letra + 1; i < letras2.size(); i++) {
+                        acumulador += letras2.get(i).getCantidad();
+                    }
+                    if (acumulador == letras2.get(numero_letra).getCantidad()) {
+                        for (int i = numero_letra + 1; i < letras2.size(); i++) {
+                            nodos2.get(numero_letra).add(nodos2.get(i));
+                        }
+                        letras2.get(numero_letra).setTipo("Hijo");
+                        nodos_padres.push(nodos2.get(numero_letra));
+                        letras_padres.push(letras2.get(numero_letra));
+                        int cantidad = letras2.size();
+                        for (int i = numero_letra; i < cantidad; i++) {
+                            letras2.remove(letras2.size() - 1);
+                            nodos2.remove(nodos2.size() - 1);
+                        }
+                    } else {
+                        if (acumulador > letras2.get(numero_letra).getCantidad()) {
+                            letras2.get(numero_letra).setTipo("Hijo");
+                            nodos_padres.push(nodos2.get(numero_letra));
+                            letras_padres.push(letras2.get(numero_letra));
+                            letras2.remove(letras2.size() - 1);
+                            nodos2.remove(nodos2.size() - 1);
+                        } else {
+                            letras2.add((Letra) letras_padres.pop());
+                            nodos2.add((DefaultMutableTreeNode) nodos_padres.pop());
+                        }
+                    }
+                } else {
+                    salir3 = true;
+                }
+            } while (letras2.size() > 1 && !salir3);
+            if (nodos2.isEmpty()) {
+                if (!nodos_padres.isEmpty()) {
+                    nodos2.add((DefaultMutableTreeNode) nodos_padres.pop());
+                }
+            }
+            if (nodos2.size() > 1) {
+                for (int i = 1; i < nodos2.size(); i++) {
+                    nodos2.get(0).add(nodos2.get(i));
+                }
+            }
+            while (!nodos_padres.isEmpty()) {
+                nodos2.get(0).add((DefaultMutableTreeNode) nodos_padres.pop());
+            }
+            raiz.add(nodos1.get(0));
+            raiz.add(nodos2.get(0));
+            m.reload();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Upss");
         }
@@ -1023,6 +1264,32 @@ public class App extends javax.swing.JFrame {
         }
         jtf_respuesta.setText(respuesta);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jb_descomprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_descomprimirMouseClicked
+        try {
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jb_descomprimirMouseClicked
+
+    private void jb_seleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_seleccionarMouseClicked
+        try {
+            JFileChooser jf = new JFileChooser();
+            jf.showOpenDialog(null);
+            File f = jf.getSelectedFile();
+            String nombre = f.getAbsolutePath();
+            try {
+                FileReader reader = new FileReader(nombre);
+                BufferedReader br = new BufferedReader(reader);
+                ta_frase.read(reader, null);
+                br.close();
+                ta_frase.requestFocus();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error!");
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jb_seleccionarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1085,10 +1352,12 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jb_cargarLaberinto;
     private javax.swing.JButton jb_compresion;
     private javax.swing.JButton jb_comprimir;
+    private javax.swing.JButton jb_descomprimir;
     private javax.swing.JButton jb_desempeno;
     private javax.swing.JButton jb_laberinto;
     private javax.swing.JButton jb_matematicas;
     private javax.swing.JButton jb_salir;
+    private javax.swing.JButton jb_seleccionar;
     private javax.swing.JButton jp_10steps;
     private javax.swing.JButton jp_15steps;
     private javax.swing.JButton jp_5steps;
