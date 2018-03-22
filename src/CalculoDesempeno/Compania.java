@@ -7,7 +7,7 @@ public class Compania {
     
     private ArrayList empleados;
     
-    Compania(){
+    public Compania(){
         empleados = new ArrayList();
     }
     
@@ -33,7 +33,7 @@ public class Compania {
         }
     }
     
-    private NodeTree encontrarEmpleado(Empleado buscar, NodeTree nodo){
+    public NodeTree encontrarEmpleado(Empleado buscar, NodeTree nodo){
         if (buscar == nodo.getData()) {
             return nodo;
         }
@@ -46,6 +46,15 @@ public class Compania {
                 }else{
                     hijo = hijo.hermanoDer();
                 }
+            }
+        }
+        return null;
+    }
+    
+    public NodeTree encontrarJefe(Empleado buscar){
+        for (int i = 0; i < empleados.size(); i++) {
+            if (((NodeTree)empleados.get(i)).data.equals(buscar)) {
+                return (NodeTree)empleados.get(i);
             }
         }
         return null;
@@ -79,11 +88,13 @@ public class Compania {
         }
     }
     
-    public void calificarFinal(){
+    public double calificarFinal(){
+        double total = 0;
         NodeTree arbolJefe;
         for (int i = 0; i < empleados.size(); i++) {
-            calificarArbol((NodeTree)empleados.get(i));
+            total += calificarArbol((NodeTree)empleados.get(i));
         }
+        return total / empleados.size();
     }
         
     private double calificarArbol(NodeTree nodo){

@@ -29,5 +29,12 @@ public class Empleado {
     public void setCalificacion(double newCalificacion){
         calificacion = newCalificacion;
     }
+
+    @Override
+    public String toString() {
+        return nombre + " ("+ calificacion + ")";
+    }
+    
+    
     
 }
