@@ -106,4 +106,8 @@ public class NodeTree implements Tree{
         }
     }
     
+    public int numHijosAdjacentes(){
+        return hijos.size();
+    }
+    
 }
