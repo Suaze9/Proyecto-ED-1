@@ -1149,7 +1149,11 @@ public class App extends javax.swing.JFrame {
             String frase_final2 = "";
             do {
                 if (frase_final.length() < 8) {
-                    frase_final2 += frase_final;
+                    for (int i = 0; i < 8 - frase_final.length(); i++) {
+                        frase_final += "0";
+                    }
+                    char caracter = (char) Integer.parseInt(frase_final, 2);
+                    frase_final2 += caracter;
                     salir = true;
                 } else {
                     String binario = "";
