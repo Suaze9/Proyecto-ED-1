@@ -363,6 +363,8 @@ public class App extends javax.swing.JFrame {
         jp_10steps = new javax.swing.JButton();
         jp_15steps = new javax.swing.JButton();
         jb_25steps = new javax.swing.JButton();
+        jSeparator13 = new javax.swing.JSeparator();
+        jb_cargarDeArchivoLaberinto = new javax.swing.JButton();
         jp_desempeno = new javax.swing.JPanel();
         jSeparator11 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
@@ -424,13 +426,13 @@ public class App extends javax.swing.JFrame {
 
         jp_LabGraphics.setBackground(new java.awt.Color(255, 255, 255));
         jp_LabGraphics.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jp_LabGraphics.setPreferredSize(new java.awt.Dimension(500, 400));
+        jp_LabGraphics.setPreferredSize(new java.awt.Dimension(750, 400));
 
         javax.swing.GroupLayout jp_LabGraphicsLayout = new javax.swing.GroupLayout(jp_LabGraphics);
         jp_LabGraphics.setLayout(jp_LabGraphicsLayout);
         jp_LabGraphicsLayout.setHorizontalGroup(
             jp_LabGraphicsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 751, Short.MAX_VALUE)
+            .addGap(0, 746, Short.MAX_VALUE)
         );
         jp_LabGraphicsLayout.setVerticalGroup(
             jp_LabGraphicsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,6 +499,13 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        jb_cargarDeArchivoLaberinto.setText("Cargar de Archivo");
+        jb_cargarDeArchivoLaberinto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_cargarDeArchivoLaberintoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -516,10 +525,12 @@ public class App extends javax.swing.JFrame {
                     .addComponent(jp_5steps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jp_10steps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jp_15steps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jb_25steps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator13)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jb_25steps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jb_cargarDeArchivoLaberinto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -543,7 +554,11 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jp_15steps)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jb_25steps)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator13, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jb_cargarDeArchivoLaberinto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jp_recorrerLab)
@@ -558,7 +573,7 @@ public class App extends javax.swing.JFrame {
             jp_laberintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp_laberintoLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jp_LabGraphics, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jp_LabGraphics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1049,14 +1064,14 @@ public class App extends javax.swing.JFrame {
         ((Laberinto) jp_LabGraphics).clearWindow();
         int LabSeleccionado = cb_Laberintos.getSelectedIndex();
         if (LabSeleccionado >= 0 && LabSeleccionado < listaLaberintos.size()) {
-            ((Laberinto) jp_LabGraphics).CambiarLaberinto(755, 400, listaLaberintos.get(LabSeleccionado));
+            ((Laberinto) jp_LabGraphics).CambiarLaberinto(750, 400, listaLaberintos.get(LabSeleccionado));
         }
         jp_LabGraphics.repaint();
     }//GEN-LAST:event_jb_cargarLaberintoActionPerformed
 
     private void jp_reiniciarLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jp_reiniciarLabActionPerformed
         ((Laberinto) jp_LabGraphics).clearWindow();
-        ((Laberinto) jp_LabGraphics).CambiarLaberinto(755, 400, (((Laberinto) jp_LabGraphics).getMatriz()));
+        ((Laberinto) jp_LabGraphics).CambiarLaberinto(750, 400, (((Laberinto) jp_LabGraphics).getMatriz()));
         jp_LabGraphics.repaint();
     }//GEN-LAST:event_jp_reiniciarLabActionPerformed
 
@@ -1498,6 +1513,44 @@ public class App extends javax.swing.JFrame {
         arbolEmpleados.reload();
     }//GEN-LAST:event_jb_evaluarDesempenoActionPerformed
 
+    private void jb_cargarDeArchivoLaberintoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cargarDeArchivoLaberintoActionPerformed
+        try {
+            JFileChooser jf = new JFileChooser();
+            jf.showOpenDialog(null);
+            File f = jf.getSelectedFile();
+            String nombre = f.getAbsolutePath();
+            try {
+                FileReader reader = new FileReader(nombre);
+                BufferedReader br = new BufferedReader(reader);
+                String line = "";
+                int[][] tempMat;
+                int sizeY = Integer.parseInt(br.readLine());
+                int sizeX = Integer.parseInt(br.readLine());
+                tempMat = new int[sizeY][sizeX];
+                boolean success = true;
+                for (int i = 0; i < sizeY; i++) {
+                    if ((line = br.readLine()) != null) {
+                        for (int j = 0; j < sizeX; j++) {
+                            tempMat[i][j] = Integer.parseInt(line.charAt(j) + "");
+                        }
+                    }else{
+                        success = false;
+                        break;
+                    }
+                }
+                br.close();
+                if (success) {
+                    ((Laberinto) jp_LabGraphics).CambiarLaberinto(750, 400, tempMat);
+                }else{
+                    System.out.println("oops!");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error!");
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jb_cargarDeArchivoLaberintoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1555,6 +1608,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -1567,6 +1621,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jb_MenorCosto;
     private javax.swing.JButton jb_agregarEmpleado;
     private javax.swing.JButton jb_arbol;
+    private javax.swing.JButton jb_cargarDeArchivoLaberinto;
     private javax.swing.JButton jb_cargarLaberinto;
     private javax.swing.JButton jb_compresion;
     private javax.swing.JButton jb_comprimir;

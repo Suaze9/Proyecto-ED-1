@@ -1,7 +1,10 @@
 package Laberinto;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import proyecto.TDA.ArrayStack;
 
@@ -20,6 +23,7 @@ public class Laberinto extends JPanel{
     
     private boolean clear;
     private boolean step;
+    private boolean printing;
     
     public void CambiarLaberinto(int matSizeX, int matSizeY, int[][] mat){
         this.matriz = mat;
@@ -58,6 +62,8 @@ public class Laberinto extends JPanel{
         dimX = matSizeX / matX;
         matCas = getMatrizCasilla(matriz);
         recorrido = new RecorrerLaberinto(matCas, matY, matX);
+        
+        printing = false;
     }
     
     @Override
@@ -65,7 +71,17 @@ public class Laberinto extends JPanel{
         int winY = matY*dimY;
         int winX = matX*dimX;
         this.setSize(winX, winY);
-        if (step) {
+        if(!printing){
+            printing = true;
+            Dimension d = this.getSize();
+            BufferedImage image = new BufferedImage(d.width, d.height, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = image.createGraphics();
+            this.paint( g2d );
+            this.setSize(matSizeX, matSizeY);
+            g.drawImage(image, 0, 0, matSizeX, matSizeY, this);
+            g2d.dispose();
+            printing = false;
+        }else if (step) {
             for (int y = 0; y < matY; y++) {
                 for (int x = 0; x < matX; x++) {
                     Color color = null;
@@ -103,7 +119,6 @@ public class Laberinto extends JPanel{
                 }
             }
         }
-        
     }
     
     public void clearWindow(){
