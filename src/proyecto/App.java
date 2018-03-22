@@ -1166,7 +1166,7 @@ public class App extends javax.swing.JFrame {
                 }
             } while (!salir);
             ta_frase1.setText(frase_final2);
-            int contador_raiz = 0;
+            /*int contador_raiz = 0;
             BinaryTree arbol_temp = arbol;
             BinaryTree arbol_temp2 = new BinaryTree();
             ArrayList<BinaryTree> visitados1 = new ArrayList();
@@ -1374,7 +1374,7 @@ public class App extends javax.swing.JFrame {
             }
             raiz.add(nodos1.get(0));
             raiz.add(nodos2.get(0));
-            m.reload();
+            m.reload();*/
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Upss");
         }
