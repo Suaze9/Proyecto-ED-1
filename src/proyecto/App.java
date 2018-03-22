@@ -38,6 +38,10 @@ public class App extends javax.swing.JFrame {
     /**
      * Creates new form App
      */
+    
+    Compania companiaDesempeno;
+    
+    
     public App() {
         this.companiaDesempeno = new Compania();
         
@@ -1438,8 +1442,6 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jb_seleccionarMouseClicked
 
-    Compania companiaDesempeno;
-    
     private void jb_agregarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregarEmpleadoActionPerformed
         
         DefaultTreeModel arbolEmpleados = (DefaultTreeModel) jt_arbolEmpleados.getModel();
