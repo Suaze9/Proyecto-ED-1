@@ -14,8 +14,10 @@ import Hoffman.Letra_Binaria;
 import Laberinto.Laberinto;
 import java.awt.CardLayout;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
@@ -38,15 +40,13 @@ public class App extends javax.swing.JFrame {
     /**
      * Creates new form App
      */
-    
     Compania companiaDesempeno;
-    
-    
+
     public App() {
         this.companiaDesempeno = new Compania();
-        
+
         initComponents();
-        
+
         this.setLocationRelativeTo(this);
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_Laberintos.getModel();
         listaLaberintos = LabeintosDefault();
@@ -1182,9 +1182,11 @@ public class App extends javax.swing.JFrame {
             ta_frase1.setText(frase_final);
             boolean salir = false;
             String frase_final2 = "";
+            int contador = frase_final.length();
             do {
                 if (frase_final.length() < 8) {
-                    for (int i = 0; i < 8 - frase_final.length(); i++) {
+                    int size = frase_final.length();
+                    for (int i = 0; i < 8 - size; i++) {
                         frase_final += "0";
                     }
                     char caracter = (char) Integer.parseInt(frase_final, 2);
@@ -1204,7 +1206,25 @@ public class App extends javax.swing.JFrame {
                     frase_final = temporal;
                 }
             } while (!salir);
-            ta_frase1.setText(frase_final2);
+            //ta_frase1.setText(frase_final2);
+            /* File archivo;
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            String documento = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo documento:");
+            try {
+                archivo = new File("./" + documento + ".txt");
+                fw = new FileWriter(archivo, true);
+                bw = new BufferedWriter(fw);
+                bw.write(frase_final2);
+                bw.newLine();
+                bw.write(contador + "");
+                bw.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            bw.close();
+            fw.close();
+            JOptionPane.showMessageDialog(this, "Documento " + documento + " agregado exitosamente!!");
             /*int contador_raiz = 0;
             BinaryTree arbol_temp = arbol;
             BinaryTree arbol_temp2 = new BinaryTree();
@@ -1433,7 +1453,7 @@ public class App extends javax.swing.JFrame {
 
     private void jb_descomprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_descomprimirMouseClicked
         try {
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jb_descomprimirMouseClicked
@@ -1458,48 +1478,48 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_seleccionarMouseClicked
 
     private void jb_agregarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregarEmpleadoActionPerformed
-        
+
         DefaultTreeModel arbolEmpleados = (DefaultTreeModel) jt_arbolEmpleados.getModel();
         TreePath rutaSeleccionada = jt_arbolEmpleados.getSelectionPath();
-        
+
         if (!"".equals(jtf_nombreEmpleado.getText()) && !"Jefes".equals(jtf_nombreEmpleado.getText())) {
             if (rutaSeleccionada == null) {
-                
-                Empleado EmpleadoNuevo = new Empleado((int)js_calificacion.getModel().getValue(), jtf_nombreEmpleado.getText());
+
+                Empleado EmpleadoNuevo = new Empleado((int) js_calificacion.getModel().getValue(), jtf_nombreEmpleado.getText());
                 companiaDesempeno.nuevoEmpleado(EmpleadoNuevo);
                 DefaultMutableTreeNode nodoEmpleadoNuevo = new DefaultMutableTreeNode(EmpleadoNuevo);
-                ((DefaultMutableTreeNode)arbolEmpleados.getRoot()).add(nodoEmpleadoNuevo);
-                
-            }else if (rutaSeleccionada.getLastPathComponent().toString().equals("Jefes")) {
-                
-                Empleado EmpleadoNuevo = new Empleado((int)js_calificacion.getModel().getValue(), jtf_nombreEmpleado.getText());
+                ((DefaultMutableTreeNode) arbolEmpleados.getRoot()).add(nodoEmpleadoNuevo);
+
+            } else if (rutaSeleccionada.getLastPathComponent().toString().equals("Jefes")) {
+
+                Empleado EmpleadoNuevo = new Empleado((int) js_calificacion.getModel().getValue(), jtf_nombreEmpleado.getText());
                 companiaDesempeno.nuevoEmpleado(EmpleadoNuevo);
                 DefaultMutableTreeNode nodoEmpleadoNuevo = new DefaultMutableTreeNode(EmpleadoNuevo);
-                ((DefaultMutableTreeNode)arbolEmpleados.getRoot()).add(nodoEmpleadoNuevo);
-                
-            }else{
-                
+                ((DefaultMutableTreeNode) arbolEmpleados.getRoot()).add(nodoEmpleadoNuevo);
+
+            } else {
+
                 ArrayStack stackEmpleados = new ArrayStack();
-                while( ! (rutaSeleccionada.getLastPathComponent().toString().equals( arbolEmpleados.getRoot().toString() ) ) ){
-                    Empleado tempEmpleado = (Empleado)((DefaultMutableTreeNode)rutaSeleccionada.getLastPathComponent()).getUserObject();
+                while (!(rutaSeleccionada.getLastPathComponent().toString().equals(arbolEmpleados.getRoot().toString()))) {
+                    Empleado tempEmpleado = (Empleado) ((DefaultMutableTreeNode) rutaSeleccionada.getLastPathComponent()).getUserObject();
                     stackEmpleados.push(tempEmpleado);
                     rutaSeleccionada = rutaSeleccionada.getParentPath();
                 }
-                
+
                 Empleado tempEmpleado = (Empleado) stackEmpleados.top();
                 NodeTree nodoActual = companiaDesempeno.encontrarJefe(tempEmpleado);
-                
-                while( !(stackEmpleados.isEmpty()) ){
+
+                while (!(stackEmpleados.isEmpty())) {
                     tempEmpleado = (Empleado) stackEmpleados.pop();
                     nodoActual = companiaDesempeno.encontrarEmpleado(tempEmpleado, nodoActual);
-                    
+
                 }
-                
-                Empleado EmpleadoNuevo = new Empleado((int)js_calificacion.getModel().getValue(), jtf_nombreEmpleado.getText());
-                companiaDesempeno.nuevoSubEmpleado((Empleado)nodoActual.data, EmpleadoNuevo);
+
+                Empleado EmpleadoNuevo = new Empleado((int) js_calificacion.getModel().getValue(), jtf_nombreEmpleado.getText());
+                companiaDesempeno.nuevoSubEmpleado((Empleado) nodoActual.data, EmpleadoNuevo);
                 rutaSeleccionada = jt_arbolEmpleados.getSelectionPath();
                 DefaultMutableTreeNode nodoEmpleadoNuevo = new DefaultMutableTreeNode(EmpleadoNuevo);
-                ((DefaultMutableTreeNode)rutaSeleccionada.getLastPathComponent()).add(nodoEmpleadoNuevo);
+                ((DefaultMutableTreeNode) rutaSeleccionada.getLastPathComponent()).add(nodoEmpleadoNuevo);
             }
         }
         arbolEmpleados.reload();
@@ -1507,9 +1527,9 @@ public class App extends javax.swing.JFrame {
 
     private void jb_evaluarDesempenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_evaluarDesempenoActionPerformed
         double promFinal = companiaDesempeno.calificarFinal();
-        
+
         DefaultTreeModel arbolEmpleados = (DefaultTreeModel) jt_arbolEmpleados.getModel();
-        jl_promTotal.setText(promFinal+"");
+        jl_promTotal.setText(promFinal + "");
         arbolEmpleados.reload();
     }//GEN-LAST:event_jb_evaluarDesempenoActionPerformed
 
@@ -1533,7 +1553,7 @@ public class App extends javax.swing.JFrame {
                         for (int j = 0; j < sizeX; j++) {
                             tempMat[i][j] = Integer.parseInt(line.charAt(j) + "");
                         }
-                    }else{
+                    } else {
                         success = false;
                         break;
                     }
@@ -1541,7 +1561,7 @@ public class App extends javax.swing.JFrame {
                 br.close();
                 if (success) {
                     ((Laberinto) jp_LabGraphics).CambiarLaberinto(750, 400, tempMat);
-                }else{
+                } else {
                     System.out.println("oops!");
                 }
             } catch (Exception e) {
