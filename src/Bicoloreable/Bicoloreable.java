@@ -23,7 +23,6 @@ public class Bicoloreable{
         pila.queue(raiz);
         while (!pila.isEmpty()){
             Vertice verticeActual = (Vertice)pila.deQueue();
-            System.out.println("--"+verticeActual.data);
             for (DefaultEdge defaultEdge : grafo.outgoingEdgesOf(verticeActual)) {
                 Vertice hijo = grafo.getEdgeTarget(defaultEdge);
                 
@@ -37,6 +36,9 @@ public class Bicoloreable{
                     System.out.println(hijo.data);
                     pila.queue(hijo);
                 }else if (hijo.tipo == verticeActual.tipo) {
+                    for (Vertice vertice : grafo.vertexSet()) {
+                        vertice.tipo = true;
+                    }
                     return false;
                 }
             }

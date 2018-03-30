@@ -5,6 +5,8 @@
  */
 package proyecto;
 
+import Bicoloreable.GrafoGrafico;
+import Bicoloreable.Vertice;
 import CalculoDesempeno.Compania;
 import CalculoDesempeno.Empleado;
 import ExpresionesMatematicas.Calculadora;
@@ -13,6 +15,7 @@ import Hoffman.Letra;
 import Hoffman.Letra_Binaria;
 import Laberinto.Laberinto;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,10 +25,14 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 import proyecto.TDA.ArrayQueue;
 import proyecto.TDA.ArrayStack;
 import proyecto.TDA.BinaryTree;
@@ -43,9 +50,11 @@ public class App extends javax.swing.JFrame {
     Compania companiaDesempeno;
 
     public App() {
-        this.companiaDesempeno = new Compania();
-
         initComponents();
+
+        this.grafoBicoloreable = new SimpleGraph<>(DefaultEdge.class);
+        ((GrafoGrafico)jp_bicolGrafo).setGrafo(grafoBicoloreable);
+        this.companiaDesempeno = new Compania();
 
         this.setLocationRelativeTo(this);
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_Laberintos.getModel();
@@ -347,6 +356,10 @@ public class App extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jpm_bicoloreable = new javax.swing.JPopupMenu();
+        jmi_agregar = new javax.swing.JMenuItem();
+        jmi_eliminar = new javax.swing.JMenuItem();
+        jmi_evaluar = new javax.swing.JMenuItem();
         jp_main = new javax.swing.JPanel();
         jp_laberinto = new javax.swing.JPanel();
         jp_LabGraphics = jp_LabGraphics = new Laberinto(755, 400);
@@ -377,8 +390,6 @@ public class App extends javax.swing.JFrame {
         jSeparator12 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         jb_evaluarDesempeno = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jl_promTotal = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jt_arbolEmpleados = new javax.swing.JTree();
@@ -402,14 +413,16 @@ public class App extends javax.swing.JFrame {
         jb_descomprimir = new javax.swing.JButton();
         jb_seleccionar = new javax.swing.JButton();
         jp_menor = new javax.swing.JPanel();
-        jp_arbol = new javax.swing.JPanel();
+        jp_bicoloreable = new javax.swing.JPanel();
+        jp_bicolGrafo = jp_bicolGrafo = new GrafoGrafico();
+        jp_bicolGrafo.setBackground(Color.white);
         jp_header = new javax.swing.JPanel();
         jb_laberinto = new javax.swing.JButton();
         jb_desempeno = new javax.swing.JButton();
         jb_matematicas = new javax.swing.JButton();
         jb_compresion = new javax.swing.JButton();
         jb_MenorCosto = new javax.swing.JButton();
-        jb_arbol = new javax.swing.JButton();
+        jb_bicoloreable = new javax.swing.JButton();
         jb_salir = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -417,6 +430,30 @@ public class App extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
+
+        jmi_agregar.setText("Agregar Vertice");
+        jmi_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_agregarActionPerformed(evt);
+            }
+        });
+        jpm_bicoloreable.add(jmi_agregar);
+
+        jmi_eliminar.setText("Eliminar Vertice");
+        jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminarActionPerformed(evt);
+            }
+        });
+        jpm_bicoloreable.add(jmi_eliminar);
+
+        jmi_evaluar.setText("Evaluar Bicoloreable");
+        jmi_evaluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_evaluarActionPerformed(evt);
+            }
+        });
+        jpm_bicoloreable.add(jmi_evaluar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -667,10 +704,6 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Promedio Total:");
-
-        jl_promTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Empleados");
 
@@ -685,12 +718,8 @@ public class App extends javax.swing.JFrame {
             .addGroup(jp_desempenoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jp_desempenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jp_desempenoLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jl_promTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel11)
                     .addComponent(jb_evaluarDesempeno, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
-                    .addComponent(jLabel10)
                     .addComponent(jScrollPane4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -708,13 +737,9 @@ public class App extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jb_evaluarDesempeno)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jl_promTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jb_evaluarDesempeno))
                     .addComponent(jSeparator11))
                 .addContainerGap())
         );
@@ -867,18 +892,47 @@ public class App extends javax.swing.JFrame {
 
         jp_main.add(jp_menor, "menor");
 
-        javax.swing.GroupLayout jp_arbolLayout = new javax.swing.GroupLayout(jp_arbol);
-        jp_arbol.setLayout(jp_arbolLayout);
-        jp_arbolLayout.setHorizontalGroup(
-            jp_arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 975, Short.MAX_VALUE)
+        jp_bicolGrafo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jp_bicolGrafo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jp_bicolGrafoMouseMoved(evt);
+            }
+        });
+        jp_bicolGrafo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jp_bicolGrafoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jp_bicolGrafoLayout = new javax.swing.GroupLayout(jp_bicolGrafo);
+        jp_bicolGrafo.setLayout(jp_bicolGrafoLayout);
+        jp_bicolGrafoLayout.setHorizontalGroup(
+            jp_bicolGrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 951, Short.MAX_VALUE)
         );
-        jp_arbolLayout.setVerticalGroup(
-            jp_arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+        jp_bicolGrafoLayout.setVerticalGroup(
+            jp_bicolGrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 443, Short.MAX_VALUE)
         );
 
-        jp_main.add(jp_arbol, "arbol");
+        javax.swing.GroupLayout jp_bicoloreableLayout = new javax.swing.GroupLayout(jp_bicoloreable);
+        jp_bicoloreable.setLayout(jp_bicoloreableLayout);
+        jp_bicoloreableLayout.setHorizontalGroup(
+            jp_bicoloreableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_bicoloreableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jp_bicolGrafo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jp_bicoloreableLayout.setVerticalGroup(
+            jp_bicoloreableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_bicoloreableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jp_bicolGrafo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jp_main.add(jp_bicoloreable, "arbol");
 
         jp_header.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jp_header.setName("Header"); // NOI18N
@@ -918,10 +972,10 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        jb_arbol.setText("Árbol de Expansión");
-        jb_arbol.addActionListener(new java.awt.event.ActionListener() {
+        jb_bicoloreable.setText("Bicoloreable");
+        jb_bicoloreable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_arbolActionPerformed(evt);
+                jb_bicoloreableActionPerformed(evt);
             }
         });
 
@@ -970,11 +1024,11 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jb_arbol)
+                .addComponent(jb_bicoloreable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jb_salir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jp_headerLayout.setVerticalGroup(
@@ -995,7 +1049,7 @@ public class App extends javax.swing.JFrame {
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jb_MenorCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jb_arbol, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jb_bicoloreable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jp_headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jb_salir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1046,10 +1100,10 @@ public class App extends javax.swing.JFrame {
         card.show(jp_main, "menor");
     }//GEN-LAST:event_jb_MenorCostoActionPerformed
 
-    private void jb_arbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_arbolActionPerformed
+    private void jb_bicoloreableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_bicoloreableActionPerformed
         CardLayout card = (CardLayout) jp_main.getLayout();
         card.show(jp_main, "arbol");
-    }//GEN-LAST:event_jb_arbolActionPerformed
+    }//GEN-LAST:event_jb_bicoloreableActionPerformed
 
     private void jb_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salirActionPerformed
         this.dispose();
@@ -1529,7 +1583,6 @@ public class App extends javax.swing.JFrame {
         double promFinal = companiaDesempeno.calificarFinal();
 
         DefaultTreeModel arbolEmpleados = (DefaultTreeModel) jt_arbolEmpleados.getModel();
-        jl_promTotal.setText(promFinal + "");
         arbolEmpleados.reload();
     }//GEN-LAST:event_jb_evaluarDesempenoActionPerformed
 
@@ -1571,6 +1624,76 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jb_cargarDeArchivoLaberintoActionPerformed
 
+    
+    Graph<Vertice, DefaultEdge> grafoBicoloreable;
+    int contadorGrafo = 0;
+    int mouseX = 0;
+    int mouseY = 0;
+    boolean conectando = false;
+    
+    Vertice conectarVertice = new Vertice(false, "temp");
+    
+    
+    private void jp_bicolGrafoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_bicolGrafoMouseClicked
+        mouseX = evt.getX();
+        mouseY = evt.getY();
+        if (SwingUtilities.isRightMouseButton( evt )) {
+            jpm_bicoloreable.show(jp_bicolGrafo, evt.getX(), evt.getY());
+            conectando = false;
+            ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, mouseX, mouseY, conectarVertice.posX, conectarVertice.posY);
+        }
+        if (conectando) {
+            conectando = false;
+            for (Vertice vertice : grafoBicoloreable.vertexSet()) {
+                if (vertice.dentroPunto(mouseX, mouseY) && vertice != conectarVertice) {
+                    grafoBicoloreable.addEdge(conectarVertice, vertice);
+                    break;
+                }
+            }
+        }else if(SwingUtilities.isLeftMouseButton(evt)){
+            for (Vertice vertice : grafoBicoloreable.vertexSet()) {
+                if (vertice.dentroPunto(mouseX, mouseY)) {
+                    conectando = true;
+                    conectarVertice = vertice;
+                    break;
+                }
+            }
+        }
+        ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, mouseX, mouseY, conectarVertice.posX, conectarVertice.posY);
+        jp_bicolGrafo.repaint();
+    }//GEN-LAST:event_jp_bicolGrafoMouseClicked
+
+    private void jmi_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_agregarActionPerformed
+        Vertice nuevoVertice = new Vertice(false, "" + contadorGrafo, mouseY, mouseX);
+        grafoBicoloreable.addVertex(nuevoVertice);
+        jp_bicolGrafo.repaint();
+        contadorGrafo++;
+    }//GEN-LAST:event_jmi_agregarActionPerformed
+
+    private void jp_bicolGrafoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_bicolGrafoMouseMoved
+        ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, evt.getX(), evt.getY(), conectarVertice.posX + conectarVertice.ancho / 2, conectarVertice.posY + conectarVertice.ancho / 2);
+        jp_bicolGrafo.repaint();
+    }//GEN-LAST:event_jp_bicolGrafoMouseMoved
+
+    private void jmi_evaluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_evaluarActionPerformed
+        if (!((GrafoGrafico)jp_bicolGrafo).evaluar()) {
+            JOptionPane.showMessageDialog(this, "No es Bicoloreable");
+        }else{
+            JOptionPane.showMessageDialog(this, "Si es Bicoloreable");
+        }
+        jp_bicolGrafo.repaint();
+    }//GEN-LAST:event_jmi_evaluarActionPerformed
+
+    private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
+        for (Vertice vertice : grafoBicoloreable.vertexSet()) {
+            if (vertice.dentroPunto(mouseX, mouseY)) {
+                grafoBicoloreable.removeVertex(vertice);
+                break;
+            }
+        }
+        jp_bicolGrafo.repaint();
+    }//GEN-LAST:event_jmi_eliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1610,7 +1733,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_Laberintos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1640,7 +1762,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jb_25steps;
     private javax.swing.JButton jb_MenorCosto;
     private javax.swing.JButton jb_agregarEmpleado;
-    private javax.swing.JButton jb_arbol;
+    private javax.swing.JButton jb_bicoloreable;
     private javax.swing.JButton jb_cargarDeArchivoLaberinto;
     private javax.swing.JButton jb_cargarLaberinto;
     private javax.swing.JButton jb_compresion;
@@ -1652,12 +1774,15 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jb_matematicas;
     private javax.swing.JButton jb_salir;
     private javax.swing.JButton jb_seleccionar;
-    private javax.swing.JLabel jl_promTotal;
+    private javax.swing.JMenuItem jmi_agregar;
+    private javax.swing.JMenuItem jmi_eliminar;
+    private javax.swing.JMenuItem jmi_evaluar;
     private javax.swing.JButton jp_10steps;
     private javax.swing.JButton jp_15steps;
     private javax.swing.JButton jp_5steps;
     private javax.swing.JPanel jp_LabGraphics;
-    private javax.swing.JPanel jp_arbol;
+    private javax.swing.JPanel jp_bicolGrafo;
+    private javax.swing.JPanel jp_bicoloreable;
     private javax.swing.JPanel jp_compresion;
     private javax.swing.JPanel jp_desempeno;
     private javax.swing.JPanel jp_header;
@@ -1668,6 +1793,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jp_recorrerLab;
     private javax.swing.JButton jp_reiniciarLab;
     private javax.swing.JButton jp_step;
+    private javax.swing.JPopupMenu jpm_bicoloreable;
     private javax.swing.JSpinner js_calificacion;
     private javax.swing.JTree jt_arbolEmpleados;
     private javax.swing.JTree jt_arbolbinario;
