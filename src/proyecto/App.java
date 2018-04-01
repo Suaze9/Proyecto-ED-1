@@ -1640,7 +1640,7 @@ public class App extends javax.swing.JFrame {
         if (SwingUtilities.isRightMouseButton( evt )) {
             jpm_bicoloreable.show(jp_bicolGrafo, evt.getX(), evt.getY());
             conectando = false;
-            ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, mouseX, mouseY, conectarVertice.posX, conectarVertice.posY);
+            ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, evt.getX(), evt.getY(), conectarVertice.posX + conectarVertice.ancho / 2, conectarVertice.posY + conectarVertice.ancho / 2);
         }
         if (conectando) {
             conectando = false;
@@ -1659,7 +1659,7 @@ public class App extends javax.swing.JFrame {
                 }
             }
         }
-        ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, mouseX, mouseY, conectarVertice.posX, conectarVertice.posY);
+        ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, evt.getX(), evt.getY(), conectarVertice.posX + conectarVertice.ancho / 2, conectarVertice.posY + conectarVertice.ancho / 2);
         jp_bicolGrafo.repaint();
     }//GEN-LAST:event_jp_bicolGrafoMouseClicked
 
