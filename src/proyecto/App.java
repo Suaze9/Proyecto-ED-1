@@ -1592,6 +1592,7 @@ public class App extends javax.swing.JFrame {
             Calculadora calc = new Calculadora();
             respuesta = calc.Solucion(problema);
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Upss");
         }
         jtf_respuesta.setText(respuesta);

@@ -30,7 +30,7 @@ public class Calculadora {
             String temp = (String)queueMult.deQueue();
             for (int i = 0; i < temp.length(); i++) {
                 if (temp.charAt(i) == operador) {
-                    String[] mult = temp.split("\\*");
+                    String[] mult = temp.split("\\"+operador);
                     while(mult.length != 1) {
                         double factorA = Double.parseDouble(mult[0]);
                         double factorB = Double.parseDouble(mult[1]);
