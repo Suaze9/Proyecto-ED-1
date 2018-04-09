@@ -15,6 +15,7 @@ import Hoffman.Codigo_Hoffman;
 import Hoffman.Letra;
 import Hoffman.Letra_Binaria;
 import Laberinto.Laberinto;
+import MenorCosto.GrafoGraficoCosto;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -56,9 +57,9 @@ public class App extends javax.swing.JFrame {
         initComponents();
 
         this.grafoBicoloreable = new SimpleGraph<>(DefaultEdge.class);
-        ((GrafoGrafico)jp_bicolGrafo).setGrafo(grafoBicoloreable);
+        ((GrafoGrafico) jp_bicolGrafo).setGrafo(grafoBicoloreable);
         this.grafoMinimo = new SimpleWeightedGraph<Vertice, DefaultWeightedEdge>(DefaultWeightedEdge.class);
-        ((GrafoGraficoMinimo)jp_minimo).setGrafo(grafoMinimo);
+        ((GrafoGraficoMinimo) jp_minimo).setGrafo(grafoMinimo);
         this.companiaDesempeno = new Compania();
 
         this.setLocationRelativeTo(this);
@@ -369,6 +370,10 @@ public class App extends javax.swing.JFrame {
         jmi_agregar1 = new javax.swing.JMenuItem();
         jmi_eliminar1 = new javax.swing.JMenuItem();
         jmi_evaluar1 = new javax.swing.JMenuItem();
+        jpm_costo = new javax.swing.JPopupMenu();
+        jmi_agregar2 = new javax.swing.JMenuItem();
+        jmi_eliminar2 = new javax.swing.JMenuItem();
+        jmi_evaluar2 = new javax.swing.JMenuItem();
         jp_main = new javax.swing.JPanel();
         jp_laberinto = new javax.swing.JPanel();
         jp_LabGraphics = jp_LabGraphics = new Laberinto(755, 400);
@@ -422,12 +427,14 @@ public class App extends javax.swing.JFrame {
         jb_descomprimir = new javax.swing.JButton();
         jb_seleccionar = new javax.swing.JButton();
         jp_menor = new javax.swing.JPanel();
+        jp_costo = jp_costo = new GrafoGraficoCosto();
+        jp_costo.setBackground(Color.white);
         jp_bicoloreable = new javax.swing.JPanel();
         jp_bicolGrafo = jp_bicolGrafo = new GrafoGrafico();
         jp_bicolGrafo.setBackground(Color.white);
         jp_arbolMinimo = new javax.swing.JPanel();
         jp_minimo = jp_minimo = new GrafoGraficoMinimo();
-        jp_bicolGrafo.setBackground(Color.white);
+        jp_minimo.setBackground(Color.white);
         jp_header = new javax.swing.JPanel();
         jb_laberinto = new javax.swing.JButton();
         jb_desempeno = new javax.swing.JButton();
@@ -484,13 +491,37 @@ public class App extends javax.swing.JFrame {
         });
         jpm_minimo.add(jmi_eliminar1);
 
-        jmi_evaluar1.setText("Evaluar Bicoloreable");
+        jmi_evaluar1.setText("Evaluar Expansión Minima");
         jmi_evaluar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmi_evaluar1ActionPerformed(evt);
             }
         });
         jpm_minimo.add(jmi_evaluar1);
+
+        jmi_agregar2.setText("Agregar Vertice");
+        jmi_agregar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_agregar2ActionPerformed(evt);
+            }
+        });
+        jpm_costo.add(jmi_agregar2);
+
+        jmi_eliminar2.setText("Eliminar Vertice");
+        jmi_eliminar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminar2ActionPerformed(evt);
+            }
+        });
+        jpm_costo.add(jmi_eliminar2);
+
+        jmi_evaluar2.setText("Evaluar Costo Minimo");
+        jmi_evaluar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_evaluar2ActionPerformed(evt);
+            }
+        });
+        jpm_costo.add(jmi_evaluar2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -916,15 +947,43 @@ public class App extends javax.swing.JFrame {
 
         jp_main.add(jp_compresion, "compresion");
 
+        jp_costo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jp_costoMouseMoved(evt);
+            }
+        });
+        jp_costo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jp_costoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jp_costoLayout = new javax.swing.GroupLayout(jp_costo);
+        jp_costo.setLayout(jp_costoLayout);
+        jp_costoLayout.setHorizontalGroup(
+            jp_costoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 487, Short.MAX_VALUE)
+        );
+        jp_costoLayout.setVerticalGroup(
+            jp_costoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 447, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jp_menorLayout = new javax.swing.GroupLayout(jp_menor);
         jp_menor.setLayout(jp_menorLayout);
         jp_menorLayout.setHorizontalGroup(
             jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 975, Short.MAX_VALUE)
+            .addGroup(jp_menorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jp_costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(478, Short.MAX_VALUE))
         );
         jp_menorLayout.setVerticalGroup(
             jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(jp_menorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jp_costo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jp_main.add(jp_menor, "menor");
@@ -1723,17 +1782,17 @@ public class App extends javax.swing.JFrame {
     int mouseX = 0;
     int mouseY = 0;
     boolean conectando = false;
-    
+
     Vertice conectarVertice = new Vertice(false, "temp");
-    
-    
+
+
     private void jp_bicolGrafoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_bicolGrafoMouseClicked
         mouseX = evt.getX();
         mouseY = evt.getY();
-        if (SwingUtilities.isRightMouseButton( evt )) {
+        if (SwingUtilities.isRightMouseButton(evt)) {
             jpm_bicoloreable.show(jp_bicolGrafo, evt.getX(), evt.getY());
             conectando = false;
-            ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, evt.getX(), evt.getY(), conectarVertice.posX + conectarVertice.ancho / 2, conectarVertice.posY + conectarVertice.ancho / 2);
+            ((GrafoGrafico) jp_bicolGrafo).setConectando(conectando, evt.getX(), evt.getY(), conectarVertice.posX + conectarVertice.ancho / 2, conectarVertice.posY + conectarVertice.ancho / 2);
         }
         if (conectando) {
             conectando = false;
@@ -1743,7 +1802,7 @@ public class App extends javax.swing.JFrame {
                     break;
                 }
             }
-        }else if(SwingUtilities.isLeftMouseButton(evt)){
+        } else if (SwingUtilities.isLeftMouseButton(evt)) {
             for (Vertice vertice : grafoBicoloreable.vertexSet()) {
                 if (vertice.dentroPunto(mouseX, mouseY)) {
                     conectando = true;
@@ -1752,7 +1811,7 @@ public class App extends javax.swing.JFrame {
                 }
             }
         }
-        ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, evt.getX(), evt.getY(), conectarVertice.posX + conectarVertice.ancho / 2, conectarVertice.posY + conectarVertice.ancho / 2);
+        ((GrafoGrafico) jp_bicolGrafo).setConectando(conectando, evt.getX(), evt.getY(), conectarVertice.posX + conectarVertice.ancho / 2, conectarVertice.posY + conectarVertice.ancho / 2);
         jp_bicolGrafo.repaint();
     }//GEN-LAST:event_jp_bicolGrafoMouseClicked
 
@@ -1764,14 +1823,14 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_agregarActionPerformed
 
     private void jp_bicolGrafoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_bicolGrafoMouseMoved
-        ((GrafoGrafico)jp_bicolGrafo).setConectando(conectando, evt.getX(), evt.getY(), conectarVertice.posX + conectarVertice.ancho / 2, conectarVertice.posY + conectarVertice.ancho / 2);
+        ((GrafoGrafico) jp_bicolGrafo).setConectando(conectando, evt.getX(), evt.getY(), conectarVertice.posX + conectarVertice.ancho / 2, conectarVertice.posY + conectarVertice.ancho / 2);
         jp_bicolGrafo.repaint();
     }//GEN-LAST:event_jp_bicolGrafoMouseMoved
 
     private void jmi_evaluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_evaluarActionPerformed
-        if (!((GrafoGrafico)jp_bicolGrafo).evaluar()) {
+        if (!((GrafoGrafico) jp_bicolGrafo).evaluar()) {
             JOptionPane.showMessageDialog(this, "No es Bicoloreable");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Si es Bicoloreable");
         }
         jp_bicolGrafo.repaint();
@@ -1792,45 +1851,45 @@ public class App extends javax.swing.JFrame {
     int mouseXMinimo = 0;
     int mouseYMinimo = 0;
     boolean conectandoMinimo = false;
-    
+
     Vertice conectarVerticeMinimo = new Vertice(false, "temp");
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         CardLayout card = (CardLayout) jp_main.getLayout();
         card.show(jp_main, "minimo");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jp_minimoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_minimoMouseMoved
-        ((GrafoGraficoMinimo)jp_minimo).setConectando(conectandoMinimo, evt.getX(), evt.getY(), conectarVerticeMinimo.posX + conectarVerticeMinimo.ancho / 2, conectarVerticeMinimo.posY + conectarVerticeMinimo.ancho / 2);
+        ((GrafoGraficoMinimo) jp_minimo).setConectando(conectandoMinimo, evt.getX(), evt.getY(), conectarVerticeMinimo.posX + conectarVerticeMinimo.ancho / 2, conectarVerticeMinimo.posY + conectarVerticeMinimo.ancho / 2);
         jp_minimo.repaint();
     }//GEN-LAST:event_jp_minimoMouseMoved
 
     private void jp_minimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_minimoMouseClicked
         mouseXMinimo = evt.getX();
         mouseYMinimo = evt.getY();
-        if (SwingUtilities.isRightMouseButton( evt )) {
+        if (SwingUtilities.isRightMouseButton(evt)) {
             jpm_minimo.show(jp_minimo, evt.getX(), evt.getY());
             conectandoMinimo = false;
-            ((GrafoGraficoMinimo)jp_minimo).setConectando(conectandoMinimo, evt.getX(), evt.getY(), conectarVerticeMinimo.posX + conectarVerticeMinimo.ancho / 2, conectarVerticeMinimo.posY + conectarVerticeMinimo.ancho / 2);
+            ((GrafoGraficoMinimo) jp_minimo).setConectando(conectandoMinimo, evt.getX(), evt.getY(), conectarVerticeMinimo.posX + conectarVerticeMinimo.ancho / 2, conectarVerticeMinimo.posY + conectarVerticeMinimo.ancho / 2);
         }
         if (conectandoMinimo) {
             conectandoMinimo = false;
             for (Vertice vertice : grafoMinimo.vertexSet()) {
                 if (vertice.dentroPunto(mouseXMinimo, mouseYMinimo) && vertice != conectarVerticeMinimo) {
-                    try{
+                    try {
                         String peso = JOptionPane.showInputDialog(jp_minimo, "Ingrese el peso de la arista:");
                         double pesoDouble = Double.parseDouble(peso);
                         DefaultWeightedEdge e = new DefaultWeightedEdge();
                         grafoMinimo.setEdgeWeight(e, pesoDouble);
                         grafoMinimo.addEdge(conectarVerticeMinimo, vertice, e);
-                        ((GrafoGraficoMinimo)jp_minimo).setArbolNull();
-                    }catch(Exception e){
-                        
+                        ((GrafoGraficoMinimo) jp_minimo).setArbolNull();
+                    } catch (Exception e) {
+
                     }
                     break;
                 }
             }
-        }else if(SwingUtilities.isLeftMouseButton(evt)){
+        } else if (SwingUtilities.isLeftMouseButton(evt)) {
             for (Vertice vertice : grafoMinimo.vertexSet()) {
                 if (vertice.dentroPunto(mouseXMinimo, mouseYMinimo)) {
                     conectandoMinimo = true;
@@ -1839,20 +1898,20 @@ public class App extends javax.swing.JFrame {
                 }
             }
         }
-        ((GrafoGraficoMinimo)jp_minimo).setConectando(conectandoMinimo, evt.getX(), evt.getY(), conectarVerticeMinimo.posX + conectarVerticeMinimo.ancho / 2, conectarVerticeMinimo.posY + conectarVerticeMinimo.ancho / 2);
+        ((GrafoGraficoMinimo) jp_minimo).setConectando(conectandoMinimo, evt.getX(), evt.getY(), conectarVerticeMinimo.posX + conectarVerticeMinimo.ancho / 2, conectarVerticeMinimo.posY + conectarVerticeMinimo.ancho / 2);
         jp_minimo.repaint();
     }//GEN-LAST:event_jp_minimoMouseClicked
 
     private void jmi_agregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_agregar1ActionPerformed
         Vertice nuevoVertice = new Vertice(false, "" + contadorGrafoMinimo, mouseYMinimo, mouseXMinimo);
         grafoMinimo.addVertex(nuevoVertice);
-        ((GrafoGraficoMinimo)jp_minimo).setArbolNull();
+        ((GrafoGraficoMinimo) jp_minimo).setArbolNull();
         jp_minimo.repaint();
         contadorGrafoMinimo++;
     }//GEN-LAST:event_jmi_agregar1ActionPerformed
 
     private void jmi_evaluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_evaluar1ActionPerformed
-        ((GrafoGraficoMinimo)jp_minimo).evaluar();
+        ((GrafoGraficoMinimo) jp_minimo).evaluar();
         jp_minimo.repaint();
     }//GEN-LAST:event_jmi_evaluar1ActionPerformed
 
@@ -1863,9 +1922,84 @@ public class App extends javax.swing.JFrame {
                 break;
             }
         }
-        ((GrafoGraficoMinimo)jp_minimo).setArbolNull();
+        ((GrafoGraficoMinimo) jp_minimo).setArbolNull();
         jp_minimo.repaint();
     }//GEN-LAST:event_jmi_eliminar1ActionPerformed
+
+    SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafoCosto;
+    int contadorGrafoCosto = 0;
+    int mouseXCosto = 0;
+    int mouseYCosto = 0;
+    boolean conectandoCosto = false;
+
+    Vertice conectarVerticeCosto = new Vertice(false, "temp");
+
+    private void jp_costoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_costoMouseClicked
+        mouseXCosto = evt.getX();
+        mouseYCosto = evt.getY();
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            jpm_costo.show(jp_costo, evt.getX(), evt.getY());
+            conectandoMinimo = false;
+            ((GrafoGraficoCosto) jp_costo).setConectando(conectandoCosto, evt.getX(), evt.getY(), conectarVerticeCosto.posX + conectarVerticeCosto.ancho / 2, conectarVerticeCosto.posY + conectarVerticeCosto.ancho / 2);
+        }
+        if (conectandoCosto) {
+            conectandoCosto = false;
+            for (Vertice vertice : grafoCosto.vertexSet()) {
+                if (vertice.dentroPunto(mouseXCosto, mouseYCosto) && vertice != conectarVerticeCosto) {
+                    try {
+                        String peso = JOptionPane.showInputDialog(jp_minimo, "Ingrese el peso de la arista:");
+                        double pesoDouble = Double.parseDouble(peso);
+                        DefaultWeightedEdge e = new DefaultWeightedEdge();
+                        grafoCosto.setEdgeWeight(e, pesoDouble);
+                        grafoCosto.addEdge(conectarVerticeCosto, vertice, e);
+                        ((GrafoGraficoCosto) jp_costo).setArbolNull();
+                    } catch (Exception e) {
+
+                    }
+                    break;
+                }
+            }
+        } else if (SwingUtilities.isLeftMouseButton(evt)) {
+            for (Vertice vertice : grafoCosto.vertexSet()) {
+                if (vertice.dentroPunto(mouseXCosto, mouseYCosto)) {
+                    conectandoCosto = true;
+                    conectarVerticeCosto = vertice;
+                    break;
+                }
+            }
+        }
+        ((GrafoGraficoCosto) jp_costo).setConectando(conectandoCosto, evt.getX(), evt.getY(), conectarVerticeCosto.posX + conectarVerticeCosto.ancho / 2, conectarVerticeCosto.posY + conectarVerticeCosto.ancho / 2);
+        jp_costo.repaint();
+    }//GEN-LAST:event_jp_costoMouseClicked
+
+    private void jp_costoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_costoMouseMoved
+        ((GrafoGraficoCosto) jp_costo).setConectando(conectandoCosto, evt.getX(), evt.getY(), conectarVerticeCosto.posX + conectarVerticeCosto.ancho / 2, conectarVerticeCosto.posY + conectarVerticeCosto.ancho / 2);
+        jp_costo.repaint();
+    }//GEN-LAST:event_jp_costoMouseMoved
+
+    private void jmi_agregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_agregar2ActionPerformed
+        Vertice nuevoVertice = new Vertice(false, "" + contadorGrafoCosto, mouseYCosto, mouseXCosto);
+        grafoCosto.addVertex(nuevoVertice);
+        ((GrafoGraficoCosto) jp_costo).setArbolNull();
+        jp_costo.repaint();
+        contadorGrafoCosto++;
+    }//GEN-LAST:event_jmi_agregar2ActionPerformed
+
+    private void jmi_eliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminar2ActionPerformed
+        for (Vertice vertice : grafoCosto.vertexSet()) {
+            if (vertice.dentroPunto(mouseXCosto, mouseYCosto)) {
+                grafoCosto.removeVertex(vertice);
+                break;
+            }
+        }
+        ((GrafoGraficoCosto) jp_costo).setArbolNull();
+        jp_costo.repaint();
+    }//GEN-LAST:event_jmi_eliminar2ActionPerformed
+
+    private void jmi_evaluar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_evaluar2ActionPerformed
+        ((GrafoGraficoCosto) jp_costo).evaluar();
+        jp_costo.repaint();
+    }//GEN-LAST:event_jmi_evaluar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1950,10 +2084,13 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jb_seleccionar;
     private javax.swing.JMenuItem jmi_agregar;
     private javax.swing.JMenuItem jmi_agregar1;
+    private javax.swing.JMenuItem jmi_agregar2;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_eliminar1;
+    private javax.swing.JMenuItem jmi_eliminar2;
     private javax.swing.JMenuItem jmi_evaluar;
     private javax.swing.JMenuItem jmi_evaluar1;
+    private javax.swing.JMenuItem jmi_evaluar2;
     private javax.swing.JButton jp_10steps;
     private javax.swing.JButton jp_15steps;
     private javax.swing.JButton jp_5steps;
@@ -1962,6 +2099,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel jp_bicolGrafo;
     private javax.swing.JPanel jp_bicoloreable;
     private javax.swing.JPanel jp_compresion;
+    private javax.swing.JPanel jp_costo;
     private javax.swing.JPanel jp_desempeno;
     private javax.swing.JPanel jp_header;
     private javax.swing.JPanel jp_laberinto;
@@ -1973,6 +2111,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jp_reiniciarLab;
     private javax.swing.JButton jp_step;
     private javax.swing.JPopupMenu jpm_bicoloreable;
+    private javax.swing.JPopupMenu jpm_costo;
     private javax.swing.JPopupMenu jpm_minimo;
     private javax.swing.JSpinner js_calificacion;
     private javax.swing.JTree jt_arbolEmpleados;

@@ -2,7 +2,6 @@ package ExpansionMinima;
 
 import Bicoloreable.*;
 import java.util.ArrayList;
-
 import org.jgrapht.graph.*;
 
 public class Kruskal{
