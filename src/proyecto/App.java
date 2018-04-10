@@ -35,6 +35,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultDirectedWeightedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleGraph;
@@ -62,9 +63,9 @@ public class App extends javax.swing.JFrame {
         ((GrafoGrafico) jp_bicolGrafo).setGrafo(grafoBicoloreable);
         this.grafoMinimo = new SimpleWeightedGraph<Vertice, DefaultWeightedEdge>(DefaultWeightedEdge.class);
         ((GrafoGraficoMinimo) jp_minimo).setGrafo(grafoMinimo);
-        this.grafoCosto = new SimpleWeightedGraph<Vertice, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+        this.grafoCosto = new DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge>(DefaultWeightedEdge.class);
         ((GrafoGraficoCosto) jp_costo).setGrafo(grafoCosto);
-        this.grafoCosto1 = new SimpleWeightedGraph<Vertice, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+        this.grafoCosto1 = new DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge>(DefaultWeightedEdge.class);
         ((GrafoGraficoCosto1) jp_costo1).setGrafo(grafoCosto1);
         this.companiaDesempeno = new Compania();
 
@@ -2214,7 +2215,7 @@ public class App extends javax.swing.JFrame {
         jp_minimo.repaint();
     }//GEN-LAST:event_jmi_eliminar1ActionPerformed
 
-    SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafoCosto;
+    DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafoCosto;
     int contadorGrafoCosto = 0;
     int mouseXCosto = 0;
     int mouseYCosto = 0;
@@ -2294,7 +2295,7 @@ public class App extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, respuesta);
     }//GEN-LAST:event_jmi_evaluar2ActionPerformed
 
-    SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafoCosto1;
+    DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafoCosto1;
     int contadorGrafoCosto1 = 0;
     int mouseXCosto1 = 0;
     int mouseYCosto1 = 0;
