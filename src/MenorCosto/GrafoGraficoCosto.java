@@ -42,40 +42,62 @@ public class GrafoGraficoCosto extends JPanel {
                 g.setColor(Color.gray);
                 g.fillOval(vertice.posX, vertice.posY, vertice.ancho, vertice.ancho);
                 g.drawString((String)vertice.data, vertice.posX, vertice.posY);
+            }
+            for (Vertice vertice : grafo.vertexSet()) {
                 for (DefaultWeightedEdge defaultEdge : grafo.outgoingEdgesOf(vertice)) {
                     Vertice hijo = grafo.getEdgeTarget(defaultEdge);
-                    if (hijo == vertice) {
-                        hijo = grafo.getEdgeSource(defaultEdge);
-                    }
-                    int StringX = 0;
-                    int StringY = 0;
-                    if (vertice.posX > hijo.posX) {
-                        if (vertice.posY > hijo.posY) {
-                            StringX = (vertice.posX + vertice.ancho / 2) - (hijo.posX + vertice.ancho / 2);
-                            StringX = (vertice.posX + vertice.ancho / 2) - StringX / 2;
-                            StringY = ( vertice.posY + vertice.ancho / 2) - (hijo.posY + vertice.ancho / 2);
-                            StringY = (vertice.posY + vertice.ancho / 2) - StringY / 2;
+                    if (hijo != vertice) {
+                        int StringX = 0;
+                        int StringY = 0;
+                        if (vertice.posX > hijo.posX) {
+                            if (vertice.posY > hijo.posY) {
+                                StringX = (vertice.posX + vertice.ancho / 2) - (hijo.posX + vertice.ancho / 2);
+                                StringX = (vertice.posX + vertice.ancho / 2) - StringX / 2;
+                                StringY = ( vertice.posY + vertice.ancho / 2) - (hijo.posY + vertice.ancho / 2);
+                                StringY = (vertice.posY + vertice.ancho / 2) - StringY / 2;
+                            }else{
+                                StringX = (vertice.posX + vertice.ancho / 2) - (hijo.posX + vertice.ancho / 2);
+                                StringX = (vertice.posX + vertice.ancho / 2) - StringX / 2;
+                                StringY = ( hijo.posY + vertice.ancho / 2) - (vertice.posY + vertice.ancho / 2);
+                                StringY = ( hijo.posY + vertice.ancho / 2) - StringY / 2;
+                            }
                         }else{
-                            StringX = (vertice.posX + vertice.ancho / 2) - (hijo.posX + vertice.ancho / 2);
-                            StringX = (vertice.posX + vertice.ancho / 2) - StringX / 2;
-                            StringY = ( hijo.posY + vertice.ancho / 2) - (vertice.posY + vertice.ancho / 2);
-                            StringY = ( hijo.posY + vertice.ancho / 2) - StringY / 2;
+                            if (vertice.posY > hijo.posY) {
+                                StringX = (hijo.posX + vertice.ancho / 2) - (vertice.posX + vertice.ancho / 2);
+                                StringX = (hijo.posX + vertice.ancho / 2) - StringX / 2;
+                                StringY = ( vertice.posY + vertice.ancho / 2) - (hijo.posY + vertice.ancho / 2);
+                                StringY = ( vertice.posY + vertice.ancho / 2) - StringY / 2;
+                            }else{
+                                StringX = (hijo.posX + vertice.ancho / 2) - (vertice.posX + vertice.ancho / 2);
+                                StringX = (hijo.posX + vertice.ancho / 2) - StringX / 2;
+                                StringY = ( hijo.posY + vertice.ancho / 2) - (vertice.posY + vertice.ancho / 2);
+                                StringY = ( hijo.posY + vertice.ancho / 2) - StringY / 2;
+                            }
                         }
-                    }else{
-                        if (vertice.posY > hijo.posY) {
-                            StringX = (hijo.posX + vertice.ancho / 2) - (vertice.posX + vertice.ancho / 2);
-                            StringX = (hijo.posX + vertice.ancho / 2) - StringX / 2;
-                            StringY = ( vertice.posY + vertice.ancho / 2) - (hijo.posY + vertice.ancho / 2);
-                            StringY = ( vertice.posY + vertice.ancho / 2) - StringY / 2;
-                        }else{
-                            StringX = (hijo.posX + vertice.ancho / 2) - (vertice.posX + vertice.ancho / 2);
-                            StringX = (hijo.posX + vertice.ancho / 2) - StringX / 2;
-                            StringY = ( hijo.posY + vertice.ancho / 2) - (vertice.posY + vertice.ancho / 2);
-                            StringY = ( hijo.posY + vertice.ancho / 2) - StringY / 2;
+                        g.setColor(Color.blue);
+                        g.drawString(grafo.getEdgeWeight(defaultEdge)+"", StringX, StringY);
+                        g.drawLine(vertice.posX + vertice.ancho / 2, vertice.posY + vertice.ancho / 2, hijo.posX + vertice.ancho / 2, hijo.posY + vertice.ancho / 2);
+                        //g.drawLine((hijo.posX + vertice.ancho / 2)-5, (hijo.posY + vertice.ancho / 2)-5, hijo.posX + vertice.ancho / 2, hijo.posY + vertice.ancho / 2);
+                        //g.drawLine((hijo.posX + vertice.ancho / 2)+5, (hijo.posY + vertice.ancho / 2)-5, hijo.posX + vertice.ancho / 2, hijo.posY + vertice.ancho / 2);
+                        
+                        int posX1 = vertice.posX + vertice.ancho / 2;
+                        int posY1 = vertice.posY + vertice.ancho / 2;
+                        int posX2 = hijo.posX + vertice.ancho / 2;
+                        int posY2 = hijo.posY + vertice.ancho / 2;
+                        int R1;
+                        if (posX1 > posX2 && posY1 > posY2) {
+                            R1 = (int) Math.sqrt(Math.pow(posX1-posX2, 2) + Math.pow(posY1-posY2, 2)) - 5;
+                        }else if(posX1 <= posX2 && posY1 > posY2){
+                            R1 = (int) Math.sqrt(Math.pow(posX2-posX1, 2) + Math.pow(posY1-posY2, 2)) - 5;
+                        }else if (posX1 > posX2 && posY1 <= posY2) {
+                            R1 = (int) Math.sqrt(Math.pow(posX1-posX2, 2) + Math.pow(posY2-posY1, 2)) - 5;
+                        }else if(posX1 <= posX2 && posY1 <= posY2){
+                            R1 = (int) Math.sqrt(Math.pow(posX2-posX1, 2) + Math.pow(posY2-posY1, 2)) - 5;
                         }
+                        
+                        g.setColor(Color.gray);
                     }
-                    g.drawString(grafo.getEdgeWeight(defaultEdge)+"", StringX, StringY);
-                    g.drawLine(vertice.posX + vertice.ancho / 2, vertice.posY + vertice.ancho / 2, hijo.posX + vertice.ancho / 2, hijo.posY + vertice.ancho / 2);
+                    
                 }
             }
             g.setColor(Color.green);
