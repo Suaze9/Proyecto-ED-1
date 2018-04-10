@@ -427,14 +427,6 @@ public class App extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
         jSeparator10 = new javax.swing.JSeparator();
-        jp_compresion = new javax.swing.JPanel();
-        jb_comprimir = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ta_frase = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        ta_frase1 = new javax.swing.JTextArea();
-        jb_descomprimir = new javax.swing.JButton();
-        jb_seleccionar = new javax.swing.JButton();
         jp_menor = new javax.swing.JPanel();
         jp_costo = jp_costo = new GrafoGraficoCosto();
         jp_costo.setBackground(Color.white);
@@ -450,6 +442,15 @@ public class App extends javax.swing.JFrame {
         jp_arbolMinimo = new javax.swing.JPanel();
         jp_minimo = jp_minimo = new GrafoGraficoMinimo();
         jp_minimo.setBackground(Color.white);
+        jp_compresion = new javax.swing.JPanel();
+        jb_comprimir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ta_frase = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ta_frase1 = new javax.swing.JTextArea();
+        jb_descomprimir = new javax.swing.JButton();
+        jb_seleccionar = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         jp_header = new javax.swing.JPanel();
         jb_laberinto = new javax.swing.JButton();
         jb_desempeno = new javax.swing.JButton();
@@ -840,7 +841,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jp_desempenoLayout.setVerticalGroup(
             jp_desempenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -891,7 +892,7 @@ public class App extends javax.swing.JFrame {
                         .addGroup(jp_matematicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
-                        .addGap(0, 824, Short.MAX_VALUE)))
+                        .addGap(0, 830, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jp_matematicasLayout.setVerticalGroup(
@@ -915,75 +916,6 @@ public class App extends javax.swing.JFrame {
         );
 
         jp_main.add(jp_matematicas, "matematicas");
-
-        jb_comprimir.setText("Comprimir");
-        jb_comprimir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jb_comprimirMouseClicked(evt);
-            }
-        });
-
-        ta_frase.setColumns(20);
-        ta_frase.setRows(5);
-        jScrollPane1.setViewportView(ta_frase);
-
-        ta_frase1.setColumns(20);
-        ta_frase1.setRows(5);
-        jScrollPane3.setViewportView(ta_frase1);
-
-        jb_descomprimir.setText("Descomprimir");
-        jb_descomprimir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jb_descomprimirMouseClicked(evt);
-            }
-        });
-
-        jb_seleccionar.setText("Seleccionar Archivo");
-        jb_seleccionar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jb_seleccionarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jp_compresionLayout = new javax.swing.GroupLayout(jp_compresion);
-        jp_compresion.setLayout(jp_compresionLayout);
-        jp_compresionLayout.setHorizontalGroup(
-            jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_compresionLayout.createSequentialGroup()
-                .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_compresionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)))
-                    .addGroup(jp_compresionLayout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(jb_seleccionar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(jb_comprimir)
-                .addGap(18, 18, 18)
-                .addComponent(jb_descomprimir)
-                .addGap(93, 93, 93))
-        );
-        jp_compresionLayout.setVerticalGroup(
-            jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_compresionLayout.createSequentialGroup()
-                .addGap(401, 401, 401)
-                .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jb_comprimir)
-                    .addComponent(jb_descomprimir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jp_compresionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jb_seleccionar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
-        );
-
-        jp_main.add(jp_compresion, "compresion");
 
         jp_costo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jp_costo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -1056,7 +988,7 @@ public class App extends javax.swing.JFrame {
             .addGroup(jp_menorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jp_costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jp_costo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
@@ -1094,7 +1026,7 @@ public class App extends javax.swing.JFrame {
         jp_bicolGrafo.setLayout(jp_bicolGrafoLayout);
         jp_bicolGrafoLayout.setHorizontalGroup(
             jp_bicolGrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 951, Short.MAX_VALUE)
+            .addGap(0, 957, Short.MAX_VALUE)
         );
         jp_bicolGrafoLayout.setVerticalGroup(
             jp_bicolGrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1136,7 +1068,7 @@ public class App extends javax.swing.JFrame {
         jp_minimo.setLayout(jp_minimoLayout);
         jp_minimoLayout.setHorizontalGroup(
             jp_minimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 951, Short.MAX_VALUE)
+            .addGap(0, 957, Short.MAX_VALUE)
         );
         jp_minimoLayout.setVerticalGroup(
             jp_minimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1161,6 +1093,77 @@ public class App extends javax.swing.JFrame {
         );
 
         jp_main.add(jp_arbolMinimo, "minimo");
+
+        jb_comprimir.setText("Comprimir");
+        jb_comprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_comprimirMouseClicked(evt);
+            }
+        });
+
+        ta_frase.setColumns(20);
+        ta_frase.setRows(5);
+        jScrollPane1.setViewportView(ta_frase);
+
+        ta_frase1.setColumns(20);
+        ta_frase1.setRows(5);
+        jScrollPane3.setViewportView(ta_frase1);
+
+        jb_descomprimir.setText("Descomprimir");
+        jb_descomprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_descomprimirMouseClicked(evt);
+            }
+        });
+
+        jb_seleccionar.setText("Seleccionar Archivo");
+        jb_seleccionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_seleccionarMouseClicked(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setText("Codigo Hoffman");
+
+        javax.swing.GroupLayout jp_compresionLayout = new javax.swing.GroupLayout(jp_compresion);
+        jp_compresion.setLayout(jp_compresionLayout);
+        jp_compresionLayout.setHorizontalGroup(
+            jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_compresionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_compresionLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel12)
+                        .addGap(45, 45, 45)
+                        .addComponent(jb_seleccionar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_comprimir)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_descomprimir))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jp_compresionLayout.setVerticalGroup(
+            jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_compresionLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_seleccionar)
+                    .addComponent(jb_comprimir)
+                    .addComponent(jb_descomprimir)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+        );
+
+        jp_main.add(jp_compresion, "compresion");
 
         jp_header.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jp_header.setName("Header"); // NOI18N
@@ -2431,6 +2434,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
