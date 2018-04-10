@@ -54,12 +54,12 @@ public class Floyd {
             for (DefaultWeightedEdge Edge : grafo.outgoingEdgesOf(vertices.get(i))) {
                 Vertice target = grafo.getEdgeTarget(Edge);
 
-                if (target == vertices.get(i)) {
-                    target = grafo.getEdgeSource(Edge);
+                if (target != vertices.get(i)) {
+                    int j = vertices.indexOf(target);
+                    matrizAdyacencia[i][j] = grafo.getEdgeWeight(Edge);
+                    matrizAdyacencia[j][i] = grafo.getEdgeWeight(Edge);
                 }
-                int j = vertices.indexOf(target);
-                matrizAdyacencia[i][j] = grafo.getEdgeWeight(Edge);
-                matrizAdyacencia[j][i] = grafo.getEdgeWeight(Edge);
+                
             }
         }
         return matrizAdyacencia;
@@ -88,8 +88,13 @@ public class Floyd {
             }
             for (int i = 0; i < cn; i++) {
                 for (int j = 0; j < cn; j++) {
-                    if (pertenece[i] != pertenece[j] && adyacencia[i][j] != 0 && adyacencia[i][j] < 99999) {
-                        distancias[i][j] = adyacencia[i][j];
+                    for (DefaultWeightedEdge Edge : grafo.edgeSet()) {
+                        if (grafo.vertexSet().toArray()[i] == grafo.getEdgeSource(Edge) && grafo.vertexSet().toArray()[j] == grafo.getEdgeTarget(Edge)) {
+                            if (pertenece[i] != pertenece[j] && adyacencia[i][j] != 0 && adyacencia[i][j] < 99999) {
+                                distancias[i][j] = adyacencia[i][j];
+                            }
+                            break;
+                        }
                     }
                 }
             }
@@ -188,8 +193,13 @@ public class Floyd {
             }
             for (int i = 0; i < cn; i++) {
                 for (int j = 0; j < cn; j++) {
-                    if (pertenece[i] != pertenece[j] && adyacencia[i][j] != 0 && adyacencia[i][j] < 99999) {
-                        distancias[i][j] = adyacencia[i][j];
+                    for (DefaultWeightedEdge Edge : grafo.edgeSet()) {
+                        if (grafo.vertexSet().toArray()[i] == grafo.getEdgeSource(Edge) && grafo.vertexSet().toArray()[j] == grafo.getEdgeTarget(Edge)) {
+                            if (pertenece[i] != pertenece[j] && adyacencia[i][j] != 0 && adyacencia[i][j] < 99999) {
+                                distancias[i][j] = adyacencia[i][j];
+                            }
+                            break;
+                        }
                     }
                 }
             }
