@@ -77,11 +77,7 @@ public class GrafoGraficoCosto extends JPanel {
                         g.setColor(Color.blue);
                         g.drawString(grafo.getEdgeWeight(defaultEdge)+"", StringX, StringY);
                         g.drawLine(vertice.posX + vertice.ancho / 2, vertice.posY + vertice.ancho / 2, hijo.posX + vertice.ancho / 2, hijo.posY + vertice.ancho / 2);
-                        //g.drawLine((hijo.posX + vertice.ancho / 2)-5, (hijo.posY + vertice.ancho / 2)-5, hijo.posX + vertice.ancho / 2, hijo.posY + vertice.ancho / 2);
-                        //g.drawLine((hijo.posX + vertice.ancho / 2)+5, (hijo.posY + vertice.ancho / 2)-5, hijo.posX + vertice.ancho / 2, hijo.posY + vertice.ancho / 2);
                         
-                        int posX1 = vertice.posX + vertice.ancho / 2;
-                        int posY1 = vertice.posY + vertice.ancho / 2;
                         int posX2 = hijo.posX + vertice.ancho / 2;
                         int posY2 = hijo.posY + vertice.ancho / 2;
                         
