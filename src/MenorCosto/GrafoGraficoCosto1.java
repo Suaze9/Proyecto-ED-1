@@ -8,7 +8,6 @@ package MenorCosto;
 import Bicoloreable.*;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
@@ -17,7 +16,7 @@ import org.jgrapht.graph.SimpleWeightedGraph;
  *
  * @author usuario
  */
-public class GrafoGraficoCosto extends JPanel {
+public class GrafoGraficoCosto1 extends JPanel {
     SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo = null;
     boolean conectando = false;
     private int mouseX = 0;
@@ -25,7 +24,7 @@ public class GrafoGraficoCosto extends JPanel {
     private int startX = 0;
     private int startY = 0;
     
-    Dijkstra k = new Dijkstra();
+    Floyd k = new Floyd();
     double[][] arbol;
     
     @Override
@@ -117,9 +116,18 @@ public class GrafoGraficoCosto extends JPanel {
         this.startY = startY;
     }
     
-    public ArrayList<Nodo_Grafo> evaluar(int origen){
+    public double[][] evaluar(){
         try{
-            ArrayList<Nodo_Grafo> arbol1 = k.evaluar(grafo, origen);
+            arbol = k.evaluar(grafo);
+            return arbol;
+        }catch(Exception e){
+            return null;
+        }
+    }
+    
+    public int[][] evaluar1(){
+        try{
+            int[][] arbol1 = k.evaluar1(grafo);
             return arbol1;
         }catch(Exception e){
             return null;

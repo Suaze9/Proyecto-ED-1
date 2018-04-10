@@ -16,6 +16,8 @@ import Hoffman.Letra;
 import Hoffman.Letra_Binaria;
 import Laberinto.Laberinto;
 import MenorCosto.GrafoGraficoCosto;
+import MenorCosto.GrafoGraficoCosto1;
+import MenorCosto.Nodo_Grafo;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -60,6 +62,10 @@ public class App extends javax.swing.JFrame {
         ((GrafoGrafico) jp_bicolGrafo).setGrafo(grafoBicoloreable);
         this.grafoMinimo = new SimpleWeightedGraph<Vertice, DefaultWeightedEdge>(DefaultWeightedEdge.class);
         ((GrafoGraficoMinimo) jp_minimo).setGrafo(grafoMinimo);
+        this.grafoCosto = new SimpleWeightedGraph<Vertice, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+        ((GrafoGraficoCosto) jp_costo).setGrafo(grafoCosto);
+        this.grafoCosto1 = new SimpleWeightedGraph<Vertice, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+        ((GrafoGraficoCosto1) jp_costo1).setGrafo(grafoCosto1);
         this.companiaDesempeno = new Compania();
 
         this.setLocationRelativeTo(this);
@@ -374,6 +380,11 @@ public class App extends javax.swing.JFrame {
         jmi_agregar2 = new javax.swing.JMenuItem();
         jmi_eliminar2 = new javax.swing.JMenuItem();
         jmi_evaluar2 = new javax.swing.JMenuItem();
+        jpm_costo1 = new javax.swing.JPopupMenu();
+        jmi_agregar3 = new javax.swing.JMenuItem();
+        jmi_eliminar3 = new javax.swing.JMenuItem();
+        jmi_evaluar3 = new javax.swing.JMenuItem();
+        jmi_evaluar4 = new javax.swing.JMenuItem();
         jp_main = new javax.swing.JPanel();
         jp_laberinto = new javax.swing.JPanel();
         jp_LabGraphics = jp_LabGraphics = new Laberinto(755, 400);
@@ -420,8 +431,6 @@ public class App extends javax.swing.JFrame {
         jb_comprimir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         ta_frase = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jt_arbolbinario = new javax.swing.JTree();
         jScrollPane3 = new javax.swing.JScrollPane();
         ta_frase1 = new javax.swing.JTextArea();
         jb_descomprimir = new javax.swing.JButton();
@@ -429,6 +438,12 @@ public class App extends javax.swing.JFrame {
         jp_menor = new javax.swing.JPanel();
         jp_costo = jp_costo = new GrafoGraficoCosto();
         jp_costo.setBackground(Color.white);
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        js_origen = new javax.swing.JSpinner();
+        jp_costo1 = jp_costo1 = new GrafoGraficoCosto1();
+        jp_costo1.setBackground(Color.white);
+        jLabel10 = new javax.swing.JLabel();
         jp_bicoloreable = new javax.swing.JPanel();
         jp_bicolGrafo = jp_bicolGrafo = new GrafoGrafico();
         jp_bicolGrafo.setBackground(Color.white);
@@ -522,6 +537,38 @@ public class App extends javax.swing.JFrame {
             }
         });
         jpm_costo.add(jmi_evaluar2);
+
+        jmi_agregar3.setText("Agregar Vertice");
+        jmi_agregar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_agregar3ActionPerformed(evt);
+            }
+        });
+        jpm_costo1.add(jmi_agregar3);
+
+        jmi_eliminar3.setText("Eliminar Vertice");
+        jmi_eliminar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminar3ActionPerformed(evt);
+            }
+        });
+        jpm_costo1.add(jmi_eliminar3);
+
+        jmi_evaluar3.setText("Evaluar Costo Minimo");
+        jmi_evaluar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_evaluar3ActionPerformed(evt);
+            }
+        });
+        jpm_costo1.add(jmi_evaluar3);
+
+        jmi_evaluar4.setText("Evaluar Costo Minimo 2");
+        jmi_evaluar4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_evaluar4ActionPerformed(evt);
+            }
+        });
+        jpm_costo1.add(jmi_evaluar4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -690,7 +737,7 @@ public class App extends javax.swing.JFrame {
                 .addGroup(jp_laberintoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jp_LabGraphics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jp_main.add(jp_laberinto, "laberinto");
@@ -864,7 +911,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtf_respuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         jp_main.add(jp_matematicas, "matematicas");
@@ -879,10 +926,6 @@ public class App extends javax.swing.JFrame {
         ta_frase.setColumns(20);
         ta_frase.setRows(5);
         jScrollPane1.setViewportView(ta_frase);
-
-        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jt_arbolbinario.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane2.setViewportView(jt_arbolbinario);
 
         ta_frase1.setColumns(20);
         ta_frase1.setRows(5);
@@ -917,20 +960,15 @@ public class App extends javax.swing.JFrame {
                         .addGap(265, 265, 265)
                         .addComponent(jb_seleccionar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_compresionLayout.createSequentialGroup()
-                        .addComponent(jb_comprimir)
-                        .addGap(18, 18, 18)
-                        .addComponent(jb_descomprimir))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91))
+                .addComponent(jb_comprimir)
+                .addGap(18, 18, 18)
+                .addComponent(jb_descomprimir)
+                .addGap(93, 93, 93))
         );
         jp_compresionLayout.setVerticalGroup(
             jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp_compresionLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(401, 401, 401)
                 .addGroup(jp_compresionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_comprimir)
                     .addComponent(jb_descomprimir))
@@ -940,13 +978,14 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jb_seleccionar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
 
         jp_main.add(jp_compresion, "compresion");
 
+        jp_costo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jp_costo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jp_costoMouseMoved(evt);
@@ -962,28 +1001,79 @@ public class App extends javax.swing.JFrame {
         jp_costo.setLayout(jp_costoLayout);
         jp_costoLayout.setHorizontalGroup(
             jp_costoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addGap(0, 453, Short.MAX_VALUE)
         );
         jp_costoLayout.setVerticalGroup(
             jp_costoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("Dijkstra");
+
+        jLabel9.setText("Origen");
+
+        jp_costo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jp_costo1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jp_costo1MouseMoved(evt);
+            }
+        });
+        jp_costo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jp_costo1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jp_costo1Layout = new javax.swing.GroupLayout(jp_costo1);
+        jp_costo1.setLayout(jp_costo1Layout);
+        jp_costo1Layout.setHorizontalGroup(
+            jp_costo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 431, Short.MAX_VALUE)
+        );
+        jp_costo1Layout.setVerticalGroup(
+            jp_costo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 415, Short.MAX_VALUE)
+        );
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setText("Floyd");
 
         javax.swing.GroupLayout jp_menorLayout = new javax.swing.GroupLayout(jp_menor);
         jp_menor.setLayout(jp_menorLayout);
         jp_menorLayout.setHorizontalGroup(
             jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp_menorLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel7)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(js_origen, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(265, 265, 265)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jp_menorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jp_costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jp_costo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         jp_menorLayout.setVerticalGroup(
             jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_menorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jp_costo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_menorLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9)
+                    .addComponent(js_origen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jp_menorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jp_costo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jp_costo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jp_main.add(jp_menor, "menor");
@@ -1008,7 +1098,7 @@ public class App extends javax.swing.JFrame {
         );
         jp_bicolGrafoLayout.setVerticalGroup(
             jp_bicolGrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 443, Short.MAX_VALUE)
+            .addGap(0, 456, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jp_bicoloreableLayout = new javax.swing.GroupLayout(jp_bicoloreable);
@@ -1050,7 +1140,7 @@ public class App extends javax.swing.JFrame {
         );
         jp_minimoLayout.setVerticalGroup(
             jp_minimoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 443, Short.MAX_VALUE)
+            .addGap(0, 456, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jp_arbolMinimoLayout = new javax.swing.GroupLayout(jp_arbolMinimo);
@@ -1374,6 +1464,7 @@ public class App extends javax.swing.JFrame {
                     }
                 }
             } while (contador2 != letras.size());
+            ArrayList<Integer> numeros2 = new ArrayList();
             String frase_final = "";
             for (int i = 0; i < frase.length(); i++) {
                 for (int j = 0; j < letras_binarias.size(); j++) {
@@ -1381,56 +1472,48 @@ public class App extends javax.swing.JFrame {
                         for (int k = 0; k < letras_binarias.get(j).getNumeros().size(); k++) {
                             frase_final += letras_binarias.get(j).getNumeros().get(k) + "";
                         }
+                        numeros2.add(frase_final.length());
                     }
                 }
             }
-            ta_frase1.setText(frase_final);
             boolean salir = false;
             String frase_final2 = "";
             int contador = frase_final.length();
             do {
-                if (frase_final.length() < 8) {
-                    int size = frase_final.length();
-                    for (int i = 0; i < 8 - size; i++) {
-                        frase_final += "0";
-                    }
-                    char caracter = (char) Integer.parseInt(frase_final, 2);
-                    frase_final2 += caracter;
-                    salir = true;
-                } else {
+                if (frase_final.length() == 8) {
                     String binario = "";
                     for (int i = 0; i < 8; i++) {
                         binario += frase_final.charAt(i);
                     }
                     char caracter = (char) Integer.parseInt(binario, 2);
                     frase_final2 += caracter;
-                    String temporal = "";
-                    for (int i = 8; i < frase_final.length(); i++) {
-                        temporal += frase_final.charAt(i);
+                    salir = true;
+                } else {
+                    if (frase_final.length() < 8) {
+                        int size = frase_final.length();
+                        for (int i = 0; i < 8 - size; i++) {
+                            frase_final += "0";
+                        }
+                        char caracter = (char) Integer.parseInt(frase_final, 2);
+                        frase_final2 += caracter;
+                        salir = true;
+                    } else {
+                        String binario = "";
+                        for (int i = 0; i < 8; i++) {
+                            binario += frase_final.charAt(i);
+                        }
+                        char caracter = (char) Integer.parseInt(binario, 2);
+                        frase_final2 += caracter;
+                        String temporal = "";
+                        for (int i = 8; i < frase_final.length(); i++) {
+                            temporal += frase_final.charAt(i);
+                        }
+                        frase_final = temporal;
                     }
-                    frase_final = temporal;
                 }
             } while (!salir);
-            //ta_frase1.setText(frase_final2);
-            /* File archivo;
-            FileWriter fw = null;
-            BufferedWriter bw = null;
-            String documento = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo documento:");
-            try {
-                archivo = new File("./" + documento + ".txt");
-                fw = new FileWriter(archivo, true);
-                bw = new BufferedWriter(fw);
-                bw.write(frase_final2);
-                bw.newLine();
-                bw.write(contador + "");
-                bw.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            bw.close();
-            fw.close();
-            JOptionPane.showMessageDialog(this, "Documento " + documento + " agregado exitosamente!!");
-            /*int contador_raiz = 0;
+            ta_frase1.setText(frase_final);
+            int contador_raiz = 0;
             BinaryTree arbol_temp = arbol;
             BinaryTree arbol_temp2 = new BinaryTree();
             ArrayList<BinaryTree> visitados1 = new ArrayList();
@@ -1438,8 +1521,6 @@ public class App extends javax.swing.JFrame {
             ArrayList<Letra> letras1 = new ArrayList();
             ArrayList<Letra> letras2 = new ArrayList();
             boolean letra_tipo = true;
-            ArrayList<DefaultMutableTreeNode> nodos1 = new ArrayList();
-            ArrayList<DefaultMutableTreeNode> nodos2 = new ArrayList();
             do {
                 boolean entrar1 = true;
                 if (arbol_temp.getHijo_izq() != null) {
@@ -1464,18 +1545,14 @@ public class App extends javax.swing.JFrame {
                     if (letra_tipo) {
                         if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
                             letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
-                            nodos1.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
                         } else {
                             letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
-                            nodos1.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
                         }
                     } else {
                         if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
                             letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
-                            nodos2.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
                         } else {
                             letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
-                            nodos2.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
                         }
                     }
                 } else {
@@ -1486,18 +1563,14 @@ public class App extends javax.swing.JFrame {
                         if (letra_tipo) {
                             if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
                                 letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
-                                nodos1.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
                             } else {
                                 letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
-                                nodos1.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
                             }
                         } else {
                             if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
                                 letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
-                                nodos2.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
                             } else {
                                 letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
-                                nodos2.add(new DefaultMutableTreeNode(((Letra) arbol_temp.getData()).getCaracter() + " (" + ((Letra) arbol_temp.getData()).getCantidad() + ")"));
                             }
                         }
                     } else {
@@ -1520,7 +1593,46 @@ public class App extends javax.swing.JFrame {
                     }
                 }
             } while (contador_raiz < 2);
-            DefaultTreeModel m = (DefaultTreeModel) jt_arbolbinario.getModel();
+            File archivo;
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            String documento = JOptionPane.showInputDialog(this, "Ingrese el nombre del nuevo documento:");
+            try {
+                archivo = new File("./" + documento + ".txt");
+                fw = new FileWriter(archivo, true);
+                bw = new BufferedWriter(fw);
+                bw.write(frase_final2 + "|");
+                bw.write(contador + "|");
+                /*bw.write(((Letra) arbol.getData()).getCaracter() + "°" + ((Letra) arbol.getData()).getTipo() + "|");
+                for (int i = 0; i < letras1.size(); i++) {
+                    bw.write(letras1.get(i).getCaracter() + "°" + letras1.get(i).getTipo() + "/");
+                }
+                bw.write("|");
+                for (int i = 0; i < letras2.size(); i++) {
+                    bw.write(letras2.get(i).getCaracter() + "°" + letras2.get(i).getTipo() + "/");
+                }
+                bw.write("|");*/
+                for (int i = 0; i < letras_binarias.size(); i++) {
+                    bw.write(letras_binarias.get(i).getCaracter() + "°");
+                    String temp = "";
+                    for (int j = 0; j < letras_binarias.get(i).getNumeros().size(); j++) {
+                        temp += letras_binarias.get(i).getNumeros().get(j) + "";
+                    }
+                    bw.write(temp + "/");
+                }
+                bw.write("|");
+                for (int i = 0; i < numeros2.size(); i++) {
+                    bw.write(numeros2.get(i) + "/");
+                }
+                bw.write("|");
+                bw.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            bw.close();
+            fw.close();
+            JOptionPane.showMessageDialog(this, "Documento " + documento + " agregado exitosamente!!");
+            /*DefaultTreeModel m = (DefaultTreeModel) jt_arbolbinario.getModel();
             DefaultMutableTreeNode nueva_raiz = new DefaultMutableTreeNode(((Letra) arbol.getData()).getCaracter() + " (" + ((Letra) arbol.getData()).getCantidad() + ")");
             m.setRoot(nueva_raiz);
             DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
@@ -1659,8 +1771,182 @@ public class App extends javax.swing.JFrame {
 
     private void jb_descomprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_descomprimirMouseClicked
         try {
-
+            JFileChooser jf = new JFileChooser();
+            jf.showOpenDialog(null);
+            File f = jf.getSelectedFile();
+            String nombre = f.getAbsolutePath();
+            try {
+                FileReader reader = new FileReader(nombre);
+                BufferedReader br = new BufferedReader(reader);
+                ta_frase1.read(reader, null);
+                br.close();
+                ta_frase1.requestFocus();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error!");
+            }
+            String frase = ta_frase1.getText();
+            String codigo = "";
+            for (int i = 0; i < frase.length(); i++) {
+                if (frase.charAt(i) != '|') {
+                    codigo += frase.charAt(i);
+                } else {
+                    break;
+                }
+            }
+            String nueva_frase = "";
+            for (int i = codigo.length() + 1; i < frase.length(); i++) {
+                nueva_frase += frase.charAt(i);
+            }
+            frase = nueva_frase;
+            String codigo2 = "";
+            for (int i = 0; i < frase.length(); i++) {
+                if (frase.charAt(i) != '|') {
+                    codigo2 += frase.charAt(i);
+                } else {
+                    break;
+                }
+            }
+            nueva_frase = "";
+            for (int i = codigo2.length() + 1; i < frase.length(); i++) {
+                nueva_frase += frase.charAt(i);
+            }
+            frase = nueva_frase;
+            String codigo3 = "";
+            for (int i = 0; i < frase.length(); i++) {
+                if (frase.charAt(i) != '|') {
+                    codigo3 += frase.charAt(i);
+                } else {
+                    break;
+                }
+            }
+            nueva_frase = "";
+            for (int i = codigo3.length() + 1; i < frase.length(); i++) {
+                nueva_frase += frase.charAt(i);
+            }
+            frase = nueva_frase;
+            String codigo4 = "";
+            for (int i = 0; i < frase.length(); i++) {
+                if (frase.charAt(i) != '|') {
+                    codigo4 += frase.charAt(i);
+                } else {
+                    break;
+                }
+            }
+            String codigo_frase = "";
+            for (int i = 0; i < codigo.length(); i++) {
+                int num = codigo.charAt(i);
+                boolean continuar = true;
+                String temp = "", temp2 = "";
+                do {
+                    if (num == 1 || num == 0) {
+                        if (num == 1) {
+                            temp += "1";
+                        } else {
+                            temp += "0";
+                        }
+                        continuar = false;
+                    } else {
+                        if (num % 2 != 0) {
+                            num--;
+                            num = num / 2;
+                            temp += "1";
+                        } else {
+                            num = num / 2;
+                            temp += "0";
+                        }
+                    }
+                } while (continuar);
+                int tamano = temp.length();
+                if (tamano < 8) {
+                    for (int j = 0; j < 8 - tamano; j++) {
+                        temp += "0";
+                    }
+                }
+                for (int j = temp.length() - 1; j >= 0; j--) {
+                    temp2 += temp.charAt(j);
+                }
+                codigo_frase += temp2;
+            }
+            int limite = Integer.parseInt(codigo2);
+            String codigo_frase2 = "";
+            for (int j = 0; j < limite; j++) {
+                codigo_frase2 += codigo_frase.charAt(j);
+            }
+            ta_frase.setText(codigo_frase2);
+            ArrayList<Letra_Binaria> letras_binarias = new ArrayList();
+            boolean salir = false;
+            do {
+                if (codigo3.length() > 2) {
+                    String temp = "";
+                    for (int i = 0; i < codigo3.length(); i++) {
+                        if (codigo3.charAt(i) != '/') {
+                            temp += codigo3.charAt(i);
+                        } else {
+                            break;
+                        }
+                    }
+                    String temp2 = "";
+                    for (int i = temp.length() + 1; i < codigo3.length(); i++) {
+                        temp2 += codigo3.charAt(i) + "";
+                    }
+                    codigo3 = temp2;
+                    char caracter = temp.charAt(0);
+                    Letra_Binaria letra = new Letra_Binaria(caracter);
+                    ArrayList<Integer> numeros = new ArrayList();
+                    for (int i = 2; i < temp.length(); i++) {
+                        numeros.add(Integer.parseInt(temp.charAt(i) + ""));
+                    }
+                    letra.setNumeros(numeros);
+                    letras_binarias.add(letra);
+                } else {
+                    salir = true;
+                }
+            } while (!salir);
+            boolean salir2 =  false;
+            String frase_final = "";
+            int acumulador = 0;
+            do {
+                if (codigo_frase2.length() > 0) {
+                    String temp = "";
+                    for (int i = 0; i < codigo4.length(); i++) {
+                        if (codigo4.charAt(i) != '/') {
+                            temp += codigo4.charAt(i);
+                        } else {
+                            break;
+                        }
+                    }
+                    String temp1 = "";
+                    for (int i = temp.length() + 1; i < codigo4.length(); i++) {
+                        temp1 += codigo4.charAt(i);
+                    }
+                    codigo4 = temp1;
+                    int num = Integer.parseInt(temp) - acumulador;
+                    acumulador = Integer.parseInt(temp);
+                    String temp2 = "";
+                    for (int i = 0; i < num; i++) {
+                        temp2 += codigo_frase2.charAt(i) + "";
+                    }
+                    String temp5 = "";
+                    for (int i = num; i < codigo_frase2.length(); i++) {
+                        temp5 += codigo_frase2.charAt(i);
+                    }
+                    codigo_frase2 = temp5;
+                    for (int i = 0; i < letras_binarias.size(); i++) {
+                        String temp3 = "";
+                        for (int j = 0; j < letras_binarias.get(i).getNumeros().size(); j++) {
+                            temp3 += letras_binarias.get(i).getNumeros().get(j) + "";
+                        }
+                        if (temp3.equals(temp2)) {
+                            frase_final += letras_binarias.get(i).getCaracter();
+                        }
+                    }
+                } else {
+                    salir2 = true;
+                }
+            } while (!salir2);
+            ta_frase.setText(frase_final);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Upss");
         }
     }//GEN-LAST:event_jb_descomprimirMouseClicked
 
@@ -1776,7 +2062,6 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jb_cargarDeArchivoLaberintoActionPerformed
 
-    
     Graph<Vertice, DefaultEdge> grafoBicoloreable;
     int contadorGrafo = 0;
     int mouseX = 0;
@@ -1939,7 +2224,7 @@ public class App extends javax.swing.JFrame {
         mouseYCosto = evt.getY();
         if (SwingUtilities.isRightMouseButton(evt)) {
             jpm_costo.show(jp_costo, evt.getX(), evt.getY());
-            conectandoMinimo = false;
+            conectandoCosto = false;
             ((GrafoGraficoCosto) jp_costo).setConectando(conectandoCosto, evt.getX(), evt.getY(), conectarVerticeCosto.posX + conectarVerticeCosto.ancho / 2, conectarVerticeCosto.posY + conectarVerticeCosto.ancho / 2);
         }
         if (conectandoCosto) {
@@ -1947,7 +2232,7 @@ public class App extends javax.swing.JFrame {
             for (Vertice vertice : grafoCosto.vertexSet()) {
                 if (vertice.dentroPunto(mouseXCosto, mouseYCosto) && vertice != conectarVerticeCosto) {
                     try {
-                        String peso = JOptionPane.showInputDialog(jp_minimo, "Ingrese el peso de la arista:");
+                        String peso = JOptionPane.showInputDialog(jp_costo, "Ingrese el peso de la arista:");
                         double pesoDouble = Double.parseDouble(peso);
                         DefaultWeightedEdge e = new DefaultWeightedEdge();
                         grafoCosto.setEdgeWeight(e, pesoDouble);
@@ -1997,9 +2282,112 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_eliminar2ActionPerformed
 
     private void jmi_evaluar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_evaluar2ActionPerformed
-        ((GrafoGraficoCosto) jp_costo).evaluar();
+        ArrayList<Nodo_Grafo> nodos = ((GrafoGraficoCosto) jp_costo).evaluar((int) js_origen.getValue());
         jp_costo.repaint();
+        String respuesta = "*** EVALUACIÓN DIJKSTRA ***\n";
+        for (int i = 0; i < nodos.size(); i++) {
+            respuesta += "- " + nodos.get(i) + "\n";
+        }
+        JOptionPane.showMessageDialog(this, respuesta);
     }//GEN-LAST:event_jmi_evaluar2ActionPerformed
+
+    SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafoCosto1;
+    int contadorGrafoCosto1 = 0;
+    int mouseXCosto1 = 0;
+    int mouseYCosto1 = 0;
+    boolean conectandoCosto1 = false;
+
+    Vertice conectarVerticeCosto1 = new Vertice(false, "temp");
+
+    private void jp_costo1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_costo1MouseMoved
+        ((GrafoGraficoCosto1) jp_costo1).setConectando(conectandoCosto1, evt.getX(), evt.getY(), conectarVerticeCosto1.posX + conectarVerticeCosto1.ancho / 2, conectarVerticeCosto1.posY + conectarVerticeCosto1.ancho / 2);
+        jp_costo1.repaint();
+    }//GEN-LAST:event_jp_costo1MouseMoved
+
+    private void jp_costo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_costo1MouseClicked
+        mouseXCosto1 = evt.getX();
+        mouseYCosto1 = evt.getY();
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            jpm_costo1.show(jp_costo1, evt.getX(), evt.getY());
+            conectandoCosto1 = false;
+            ((GrafoGraficoCosto1) jp_costo1).setConectando(conectandoCosto1, evt.getX(), evt.getY(), conectarVerticeCosto1.posX + conectarVerticeCosto1.ancho / 2, conectarVerticeCosto1.posY + conectarVerticeCosto1.ancho / 2);
+        }
+        if (conectandoCosto1) {
+            conectandoCosto1 = false;
+            for (Vertice vertice : grafoCosto1.vertexSet()) {
+                if (vertice.dentroPunto(mouseXCosto1, mouseYCosto1) && vertice != conectarVerticeCosto1) {
+                    try {
+                        String peso = JOptionPane.showInputDialog(jp_costo1, "Ingrese el peso de la arista:");
+                        double pesoDouble = Double.parseDouble(peso);
+                        DefaultWeightedEdge e = new DefaultWeightedEdge();
+                        grafoCosto1.setEdgeWeight(e, pesoDouble);
+                        grafoCosto1.addEdge(conectarVerticeCosto1, vertice, e);
+                        ((GrafoGraficoCosto1) jp_costo1).setArbolNull();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Upss");
+                    }
+                    break;
+                }
+            }
+        } else if (SwingUtilities.isLeftMouseButton(evt)) {
+            for (Vertice vertice : grafoCosto1.vertexSet()) {
+                if (vertice.dentroPunto(mouseXCosto1, mouseYCosto1)) {
+                    conectandoCosto1 = true;
+                    conectarVerticeCosto1 = vertice;
+                    break;
+                }
+            }
+        }
+        ((GrafoGraficoCosto1) jp_costo1).setConectando(conectandoCosto1, evt.getX(), evt.getY(), conectarVerticeCosto1.posX + conectarVerticeCosto1.ancho / 2, conectarVerticeCosto1.posY + conectarVerticeCosto1.ancho / 2);
+        jp_costo1.repaint();
+    }//GEN-LAST:event_jp_costo1MouseClicked
+
+    private void jmi_evaluar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_evaluar3ActionPerformed
+        double[][] distancias = ((GrafoGraficoCosto1) jp_costo1).evaluar();
+        String respuesta = "*** EVALUACIÓN FLOYD ***\n"
+                + "-> Matriz de Distancia\n";
+        for (int i = 0; i < distancias.length; i++) {
+            for (int j = 0; j < distancias[i].length; j++) {
+                respuesta += " {" + distancias[i][j] + "}";
+            }
+            respuesta += "\n";
+        }
+        JOptionPane.showMessageDialog(this, respuesta);
+        jp_costo1.repaint();
+    }//GEN-LAST:event_jmi_evaluar3ActionPerformed
+
+    private void jmi_eliminar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminar3ActionPerformed
+        for (Vertice vertice : grafoCosto1.vertexSet()) {
+            if (vertice.dentroPunto(mouseXCosto1, mouseYCosto1)) {
+                grafoCosto1.removeVertex(vertice);
+                break;
+            }
+        }
+        ((GrafoGraficoCosto1) jp_costo1).setArbolNull();
+        jp_costo1.repaint();
+    }//GEN-LAST:event_jmi_eliminar3ActionPerformed
+
+    private void jmi_agregar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_agregar3ActionPerformed
+        Vertice nuevoVertice = new Vertice(false, "" + contadorGrafoCosto1, mouseYCosto1, mouseXCosto1);
+        grafoCosto1.addVertex(nuevoVertice);
+        ((GrafoGraficoCosto1) jp_costo1).setArbolNull();
+        jp_costo1.repaint();
+        contadorGrafoCosto1++;
+    }//GEN-LAST:event_jmi_agregar3ActionPerformed
+
+    private void jmi_evaluar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_evaluar4ActionPerformed
+        int[][] recorridos = ((GrafoGraficoCosto1) jp_costo1).evaluar1();
+        String respuesta = "*** EVALUACIÓN FLOYD ***\n"
+                + "-> Matriz de Recorridos\n";
+        for (int i = 0; i < recorridos.length; i++) {
+            for (int j = 0; j < recorridos[i].length; j++) {
+                respuesta += " {" + recorridos[i][j] + "}";
+            }
+            respuesta += "\n";
+        }
+        JOptionPane.showMessageDialog(this, respuesta);
+        jp_costo1.repaint();
+    }//GEN-LAST:event_jmi_evaluar4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2041,17 +2429,19 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
@@ -2085,12 +2475,16 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_agregar;
     private javax.swing.JMenuItem jmi_agregar1;
     private javax.swing.JMenuItem jmi_agregar2;
+    private javax.swing.JMenuItem jmi_agregar3;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_eliminar1;
     private javax.swing.JMenuItem jmi_eliminar2;
+    private javax.swing.JMenuItem jmi_eliminar3;
     private javax.swing.JMenuItem jmi_evaluar;
     private javax.swing.JMenuItem jmi_evaluar1;
     private javax.swing.JMenuItem jmi_evaluar2;
+    private javax.swing.JMenuItem jmi_evaluar3;
+    private javax.swing.JMenuItem jmi_evaluar4;
     private javax.swing.JButton jp_10steps;
     private javax.swing.JButton jp_15steps;
     private javax.swing.JButton jp_5steps;
@@ -2100,6 +2494,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel jp_bicoloreable;
     private javax.swing.JPanel jp_compresion;
     private javax.swing.JPanel jp_costo;
+    private javax.swing.JPanel jp_costo1;
     private javax.swing.JPanel jp_desempeno;
     private javax.swing.JPanel jp_header;
     private javax.swing.JPanel jp_laberinto;
@@ -2112,10 +2507,11 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton jp_step;
     private javax.swing.JPopupMenu jpm_bicoloreable;
     private javax.swing.JPopupMenu jpm_costo;
+    private javax.swing.JPopupMenu jpm_costo1;
     private javax.swing.JPopupMenu jpm_minimo;
     private javax.swing.JSpinner js_calificacion;
+    private javax.swing.JSpinner js_origen;
     private javax.swing.JTree jt_arbolEmpleados;
-    private javax.swing.JTree jt_arbolbinario;
     private javax.swing.JTextField jtf_nombreEmpleado;
     private javax.swing.JTextField jtf_problema;
     private javax.swing.JTextField jtf_respuesta;

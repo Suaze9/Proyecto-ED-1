@@ -95,6 +95,7 @@ public class Codigo_Hoffman {
                 salir = true;
             }
         } while (!salir);
+        ((Letra)arboles.get(0).getData()).setTipo("Raiz");
         return arboles.get(0);
     }
 }
