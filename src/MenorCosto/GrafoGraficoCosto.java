@@ -84,16 +84,8 @@ public class GrafoGraficoCosto extends JPanel {
                         int posY1 = vertice.posY + vertice.ancho / 2;
                         int posX2 = hijo.posX + vertice.ancho / 2;
                         int posY2 = hijo.posY + vertice.ancho / 2;
-                        int R1;
-                        if (posX1 > posX2 && posY1 > posY2) {
-                            R1 = (int) Math.sqrt(Math.pow(posX1-posX2, 2) + Math.pow(posY1-posY2, 2)) - 5;
-                        }else if(posX1 <= posX2 && posY1 > posY2){
-                            R1 = (int) Math.sqrt(Math.pow(posX2-posX1, 2) + Math.pow(posY1-posY2, 2)) - 5;
-                        }else if (posX1 > posX2 && posY1 <= posY2) {
-                            R1 = (int) Math.sqrt(Math.pow(posX1-posX2, 2) + Math.pow(posY2-posY1, 2)) - 5;
-                        }else if(posX1 <= posX2 && posY1 <= posY2){
-                            R1 = (int) Math.sqrt(Math.pow(posX2-posX1, 2) + Math.pow(posY2-posY1, 2)) - 5;
-                        }
+                        
+                        g.fillRect(posX2-5, posY2-5, 10, 10);
                         
                         g.setColor(Color.gray);
                     }
