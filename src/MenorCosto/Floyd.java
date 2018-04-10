@@ -19,7 +19,7 @@ public class Floyd {
     public Floyd() {
     }
 
-    public double[][] evaluar(SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo) {
+    public double[][] evaluar(DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo) {
         try {
             double[][] ady = matrizAdyacencia(grafo);
             double[][] arbol = evaluacionFloyd(grafo, ady);
@@ -29,7 +29,7 @@ public class Floyd {
         }
     }
 
-    public int[][] evaluar1(SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo) {
+    public int[][] evaluar1(DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo) {
         try {
             double[][] ady = matrizAdyacencia(grafo);
             int[][] arbol = evaluacionFloyd1(grafo, ady);
@@ -39,7 +39,7 @@ public class Floyd {
         }
     }
 
-    private double[][] matrizAdyacencia(SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo) {
+    private double[][] matrizAdyacencia(DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo) {
         ArrayList<Vertice> vertices = new ArrayList(grafo.vertexSet());
 
         int size = vertices.size();
@@ -65,7 +65,7 @@ public class Floyd {
         return matrizAdyacencia;
     }
 
-    private double[][] evaluacionFloyd(SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo, double[][] adyacencia) {
+    private double[][] evaluacionFloyd(DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo, double[][] adyacencia) {
         try {
             int cn = adyacencia.length;
             double[][] arbol = new double[cn][cn];
@@ -165,7 +165,7 @@ public class Floyd {
         }
     }
 
-    private int[][] evaluacionFloyd1(SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo, double[][] adyacencia) {
+    private int[][] evaluacionFloyd1(DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo, double[][] adyacencia) {
         try {
             int cn = adyacencia.length;
             double[][] arbol = new double[cn][cn];

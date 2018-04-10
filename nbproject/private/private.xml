@@ -14,11 +14,12 @@
         <group/>
         <group name="Programacion #2">
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/proyecto/TDA/BinaryTree.java</file>
-            <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/CalculoDesempeno/Compania.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/Bicoloreable/Bicoloreable.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/proyecto/TDA/ArrayQueue.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/proyecto/TDA/ArrayList.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/proyecto/TDA/Tree.java</file>
+            <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/ExpansionMinima/Kruskal.java</file>
+            <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/ExpansionMinima/GrafoGraficoMinimo.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/proyecto/TDA/NodeTree.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/proyecto/TDA/List.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/proyecto/App.java</file>
@@ -26,6 +27,7 @@
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/Bicoloreable/GrafoGrafico.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/proyecto/TDA/ADTBinaryTree.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/proyecto/TDA/ArrayStack.java</file>
+            <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/ExpresionesMatematicas/Calculadora.java</file>
             <file>file:/C:/Users/Suazo/Documents/Trabajos/Programación/Proyecto%20EDD%201/Proyecto/src/CalculoDesempeno/Empleado.java</file>
         </group>
     </open-files>
