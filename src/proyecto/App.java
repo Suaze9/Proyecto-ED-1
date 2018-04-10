@@ -1516,87 +1516,7 @@ public class App extends javax.swing.JFrame {
                     }
                 }
             } while (!salir);
-            ta_frase1.setText(frase_final);
-            int contador_raiz = 0;
-            BinaryTree arbol_temp = arbol;
-            BinaryTree arbol_temp2 = new BinaryTree();
-            ArrayList<BinaryTree> visitados1 = new ArrayList();
-            ArrayStack padres1 = new ArrayStack();
-            ArrayList<Letra> letras1 = new ArrayList();
-            ArrayList<Letra> letras2 = new ArrayList();
-            boolean letra_tipo = true;
-            do {
-                boolean entrar1 = true;
-                if (arbol_temp.getHijo_izq() != null) {
-                    for (int i = 0; i < visitados1.size(); i++) {
-                        if (visitados1.get(i) == arbol_temp.getHijo_izq()) {
-                            entrar1 = false;
-                        }
-                    }
-                }
-                boolean entrar2 = true;
-                if (arbol_temp.getHijo_der() != null) {
-                    for (int i = 0; i < visitados1.size(); i++) {
-                        if (visitados1.get(i) == arbol_temp.getHijo_der()) {
-                            entrar2 = false;
-                        }
-                    }
-                }
-                if (arbol_temp.getHijo_izq() != null && entrar1) {
-                    padres1.push(arbol_temp);
-                    arbol_temp2 = arbol_temp;
-                    arbol_temp = arbol_temp.getHijo_izq();
-                    if (letra_tipo) {
-                        if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
-                            letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
-                        } else {
-                            letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
-                        }
-                    } else {
-                        if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
-                            letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
-                        } else {
-                            letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
-                        }
-                    }
-                } else {
-                    if (arbol_temp.getHijo_der() != null && entrar2) {
-                        padres1.push(arbol_temp);
-                        arbol_temp2 = arbol_temp;
-                        arbol_temp = arbol_temp.getHijo_der();
-                        if (letra_tipo) {
-                            if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
-                                letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
-                            } else {
-                                letras1.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
-                            }
-                        } else {
-                            if (arbol_temp.getHijo_izq() != null || arbol_temp.getHijo_der() != null) {
-                                letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "PadreHijo"));
-                            } else {
-                                letras2.add(new Letra(((Letra) arbol_temp.getData()).getCaracter(), ((Letra) arbol_temp.getData()).getCantidad(), "Hijo"));
-                            }
-                        }
-                    } else {
-                        if (entrar1 == false && entrar2 == false) {
-                            visitados1.add(arbol_temp);
-                            arbol_temp = (BinaryTree) padres1.pop();
-                            if (arbol_temp == arbol) {
-                                contador_raiz++;
-                                letra_tipo = false;
-                            }
-                        } else {
-                            visitados1.add(arbol_temp);
-                            arbol_temp = arbol_temp2;
-                            arbol_temp2 = (BinaryTree) padres1.pop();
-                            if (arbol_temp == arbol) {
-                                contador_raiz++;
-                                letra_tipo = false;
-                            }
-                        }
-                    }
-                }
-            } while (contador_raiz < 2);
+            ta_frase1.setText(frase_final2);
             File archivo;
             FileWriter fw = null;
             BufferedWriter bw = null;
@@ -1607,15 +1527,6 @@ public class App extends javax.swing.JFrame {
                 bw = new BufferedWriter(fw);
                 bw.write(frase_final2 + "|");
                 bw.write(contador + "|");
-                /*bw.write(((Letra) arbol.getData()).getCaracter() + "°" + ((Letra) arbol.getData()).getTipo() + "|");
-                for (int i = 0; i < letras1.size(); i++) {
-                    bw.write(letras1.get(i).getCaracter() + "°" + letras1.get(i).getTipo() + "/");
-                }
-                bw.write("|");
-                for (int i = 0; i < letras2.size(); i++) {
-                    bw.write(letras2.get(i).getCaracter() + "°" + letras2.get(i).getTipo() + "/");
-                }
-                bw.write("|");*/
                 for (int i = 0; i < letras_binarias.size(); i++) {
                     bw.write(letras_binarias.get(i).getCaracter() + "°");
                     String temp = "";
@@ -1636,125 +1547,6 @@ public class App extends javax.swing.JFrame {
             bw.close();
             fw.close();
             JOptionPane.showMessageDialog(this, "Documento " + documento + " agregado exitosamente!!");
-            /*DefaultTreeModel m = (DefaultTreeModel) jt_arbolbinario.getModel();
-            DefaultMutableTreeNode nueva_raiz = new DefaultMutableTreeNode(((Letra) arbol.getData()).getCaracter() + " (" + ((Letra) arbol.getData()).getCantidad() + ")");
-            m.setRoot(nueva_raiz);
-            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
-            ArrayStack nodos_padres = new ArrayStack();
-            ArrayStack letras_padres = new ArrayStack();
-            boolean salir2 = false;
-            do {
-                int numero_letra = -1;
-                for (int i = 0; i < letras1.size(); i++) {
-                    if (letras1.get(i).getTipo().equals("PadreHijo")) {
-                        numero_letra = i;
-                    }
-                }
-                if (numero_letra >= 0) {
-                    int acumulador = 0;
-                    for (int i = numero_letra + 1; i < letras1.size(); i++) {
-                        acumulador += letras1.get(i).getCantidad();
-                    }
-                    if (acumulador == letras1.get(numero_letra).getCantidad()) {
-                        for (int i = numero_letra + 1; i < letras1.size(); i++) {
-                            nodos1.get(numero_letra).add(nodos1.get(i));
-                        }
-                        letras1.get(numero_letra).setTipo("Hijo");
-                        nodos_padres.push(nodos1.get(numero_letra));
-                        letras_padres.push(letras1.get(numero_letra));
-                        int cantidad = letras1.size();
-                        for (int i = numero_letra; i < cantidad; i++) {
-                            letras1.remove(letras1.size() - 1);
-                            nodos1.remove(nodos1.size() - 1);
-                        }
-                    } else {
-                        if (acumulador > letras1.get(numero_letra).getCantidad()) {
-                            letras1.get(numero_letra).setTipo("Hijo");
-                            nodos_padres.push(nodos1.get(numero_letra));
-                            letras_padres.push(letras1.get(numero_letra));
-                            letras1.remove(letras1.size() - 1);
-                            nodos1.remove(nodos1.size() - 1);
-                        } else {
-                            letras1.add((Letra) letras_padres.pop());
-                            nodos1.add((DefaultMutableTreeNode) nodos_padres.pop());
-                        }
-                    }
-                } else {
-                    salir2 = true;
-                }
-            } while (letras1.size() > 1 && !salir2);
-            if (nodos1.isEmpty()) {
-                if (!nodos_padres.isEmpty()) {
-                    nodos1.add((DefaultMutableTreeNode) nodos_padres.pop());
-                }
-            }
-            if (nodos1.size() > 1) {
-                for (int i = 1; i < nodos1.size(); i++) {
-                    nodos1.get(0).add(nodos1.get(i));
-                }
-            }
-            while (!nodos_padres.isEmpty()) {
-                nodos1.get(0).add((DefaultMutableTreeNode) nodos_padres.pop());
-            }
-            nodos_padres = new ArrayStack();
-            letras_padres = new ArrayStack();
-            boolean salir3 = false;
-            do {
-                int numero_letra = -1;
-                for (int i = 0; i < letras2.size(); i++) {
-                    if (letras2.get(i).getTipo().equals("PadreHijo")) {
-                        numero_letra = i;
-                    }
-                }
-                if (numero_letra >= 0) {
-                    int acumulador = 0;
-                    for (int i = numero_letra + 1; i < letras2.size(); i++) {
-                        acumulador += letras2.get(i).getCantidad();
-                    }
-                    if (acumulador == letras2.get(numero_letra).getCantidad()) {
-                        for (int i = numero_letra + 1; i < letras2.size(); i++) {
-                            nodos2.get(numero_letra).add(nodos2.get(i));
-                        }
-                        letras2.get(numero_letra).setTipo("Hijo");
-                        nodos_padres.push(nodos2.get(numero_letra));
-                        letras_padres.push(letras2.get(numero_letra));
-                        int cantidad = letras2.size();
-                        for (int i = numero_letra; i < cantidad; i++) {
-                            letras2.remove(letras2.size() - 1);
-                            nodos2.remove(nodos2.size() - 1);
-                        }
-                    } else {
-                        if (acumulador > letras2.get(numero_letra).getCantidad()) {
-                            letras2.get(numero_letra).setTipo("Hijo");
-                            nodos_padres.push(nodos2.get(numero_letra));
-                            letras_padres.push(letras2.get(numero_letra));
-                            letras2.remove(letras2.size() - 1);
-                            nodos2.remove(nodos2.size() - 1);
-                        } else {
-                            letras2.add((Letra) letras_padres.pop());
-                            nodos2.add((DefaultMutableTreeNode) nodos_padres.pop());
-                        }
-                    }
-                } else {
-                    salir3 = true;
-                }
-            } while (letras2.size() > 1 && !salir3);
-            if (nodos2.isEmpty()) {
-                if (!nodos_padres.isEmpty()) {
-                    nodos2.add((DefaultMutableTreeNode) nodos_padres.pop());
-                }
-            }
-            if (nodos2.size() > 1) {
-                for (int i = 1; i < nodos2.size(); i++) {
-                    nodos2.get(0).add(nodos2.get(i));
-                }
-            }
-            while (!nodos_padres.isEmpty()) {
-                nodos2.get(0).add((DefaultMutableTreeNode) nodos_padres.pop());
-            }
-            raiz.add(nodos1.get(0));
-            raiz.add(nodos2.get(0));
-            m.reload();*/
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Upss");
         }
@@ -1906,9 +1698,10 @@ public class App extends javax.swing.JFrame {
                     salir = true;
                 }
             } while (!salir);
-            boolean salir2 =  false;
+            boolean salir2 = false;
             String frase_final = "";
             int acumulador = 0;
+            ta_frase1.setText(codigo_frase2);
             do {
                 if (codigo_frase2.length() > 0) {
                     String temp = "";

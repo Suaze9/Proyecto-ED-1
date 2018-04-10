@@ -119,8 +119,8 @@ public class GrafoGraficoCosto1 extends JPanel {
     
     public double[][] evaluar(){
         try{
-            arbol = k.evaluar(grafo);
-            return arbol;
+            double[][] arbol1 = k.evaluar(grafo);
+            return arbol1;
         }catch(Exception e){
             return null;
         }
