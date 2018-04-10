@@ -19,7 +19,7 @@ public class Dijkstra {
     public Dijkstra() {
     }
 
-    public ArrayList<Nodo_Grafo> evaluar(SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo, int origen) {
+    public ArrayList<Nodo_Grafo> evaluar(DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo, int origen) {
         try {
             double[][] ady = matrizAdyacencia(grafo);
             ArrayList<Nodo_Grafo> arbol = evaluacionDijkstra(grafo, ady, origen);
@@ -29,7 +29,7 @@ public class Dijkstra {
         }
     }
 
-    private double[][] matrizAdyacencia(SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo) {
+    private double[][] matrizAdyacencia(DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo) {
         ArrayList<Vertice> vertices = new ArrayList(grafo.vertexSet());
 
         int size = vertices.size();
@@ -55,7 +55,7 @@ public class Dijkstra {
         return matrizAdyacencia;
     }
 
-    private ArrayList<Nodo_Grafo> evaluacionDijkstra(SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo, double[][] adyacencia, int origen) {
+    private ArrayList<Nodo_Grafo> evaluacionDijkstra(DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo, double[][] adyacencia, int origen) {
         try {
             int cn = adyacencia.length;
             double[][] arbol = new double[cn][cn];

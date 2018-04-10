@@ -9,6 +9,7 @@ import Bicoloreable.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
+import org.jgrapht.graph.DefaultDirectedWeightedGraph;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
@@ -17,7 +18,7 @@ import org.jgrapht.graph.SimpleWeightedGraph;
  * @author usuario
  */
 public class GrafoGraficoCosto1 extends JPanel {
-    SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo = null;
+    DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo = null;
     boolean conectando = false;
     private int mouseX = 0;
     private int mouseY = 0;
@@ -100,7 +101,7 @@ public class GrafoGraficoCosto1 extends JPanel {
     
     }
     
-    public void setGrafo(SimpleWeightedGraph<Vertice, DefaultWeightedEdge> grafo){
+    public void setGrafo(DefaultDirectedWeightedGraph<Vertice, DefaultWeightedEdge> grafo){
         
         if (grafo!=null) {
             this.grafo = grafo;
